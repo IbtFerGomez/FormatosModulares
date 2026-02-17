@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-14 Histórico Placentas</title>
+    <link rel="stylesheet" href="format-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="format-app.js"></script>
+    <style>
+        /* Configuración de Impresión Horizontal */
+        @page { size: landscape; margin: 0.5cm; }
+        @media print { .btn-add, .global-controls { display:none !important; } }
+        
+        .section-header { background-color: #1E3A5F; color: white; padding: 5px; font-weight: bold; font-size: 11px; }
+        .compact-table th, .compact-table td { font-size: 10px; padding: 4px; }
+    </style>
+</head>
+<body id="doc-fo-lc-14">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+    </div>
+    
+    <div class="container" style="max-width:100%; width:100%;">
+        <div class="header-main">
+            <h1>REGISTRO HISTÓRICO DE PLACENTAS LIBERADAS PARA PRODUCCIÓN</h1>
+            <div class="metadata">Código: FO-LC-14 | Ref: FO-LC-18 / FO-OP-13</div>
+        </div>
+        
+        <div class="section">
+            <table class="compact-table" id="tbl-placentas">
+                <thead>
+                    <tr style="background:#1E3A5F; color:white;">
+                        <th width="15%">ID Interno (TPL)</th>
+                        <th width="10%">Fecha Recepción</th>
+                        <th width="15%">Ref. Eval. Macroscópica (FO-LC-18)</th>
+                        <th width="15%">ID Donante</th>
+                        <th width="15%">Serología (Dictamen)</th>
+                        <th width="15%">Fecha Liberación</th>
+                        <th width="15%">Liberó (Calidad)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input class="cedit" placeholder="TPL.XX..."></td>
+                        <td><input type="date" class="cedit"></td>
+                        <td><input class="cedit" placeholder="Folio..."></td>
+                        <td><input class="cedit"></td>
+                        <td><select class="cedit"><option>NEGATIVO (Aprobado)</option><option>POSITIVO (Rechazado)</option></select></td>
+                        <td><input type="date" class="cedit"></td>
+                        <td><input class="cedit"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn-add no-print" onclick="addRow('tbl-placentas')" style="margin-top:10px; width:100%; background:#e2e8f0; border:1px dashed #999;">+ Agregar Fila</button>
+        </div>
+        <div class="footer">FO-LC-14 | Histórico Placentas | Xelle Scientific</div>
+    </div>
+    <script>
+        function addRow(id) {
+            const t = document.getElementById(id).getElementsByTagName('tbody')[0];
+            const r = t.rows[0].cloneNode(true);
+            r.querySelectorAll('input').forEach(i=>i.value='');
+            t.appendChild(r);
+        }
+    </script>
+</body>
+</html>

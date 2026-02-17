@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-15 Histórico Líneas</title>
+    <link rel="stylesheet" href="format-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="format-app.js"></script>
+    <style>
+        @media print { .btn-add, .global-controls { display:none !important; } }
+        .section-header { background-color: #1E3A5F; color: white; padding: 5px; font-weight: bold; }
+    </style>
+</head>
+<body id="doc-fo-lc-15">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+    </div>
+    
+    <div class="container" style="max-width:100%;">
+        <div class="header-main">
+            <h1>REGISTRO HISTÓRICO DE LÍNEAS LIBERADAS PARA PRODUCCIÓN</h1>
+            <div class="metadata">Código: FO-LC-15 | Ref: FO-LC-16 (Cover Sheet)</div>
+        </div>
+        
+        <div class="section">
+            <table class="compact-table" id="tbl-lineas">
+                <thead>
+                    <tr style="background:#1E3A5F; color:white;">
+                        <th>Código Línea (TPL...Px)</th>
+                        <th>Origen (Ref. FO-LC-16)</th>
+                        <th>Pasaje (Px)</th>
+                        <th>Fecha Congelación</th>
+                        <th>Viales Producidos</th>
+                        <th>Ubicación Banco</th>
+                        <th>Liberó (Calidad)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input class="cedit" placeholder="TPL..."></td>
+                        <td><input class="cedit" placeholder="Folio FO-LC-16"></td>
+                        <td><input class="cedit" style="width:50px"></td>
+                        <td><input type="date" class="cedit"></td>
+                        <td><input class="cedit" type="number"></td>
+                        <td><input class="cedit" placeholder="Tanque/Caja"></td>
+                        <td><input class="cedit"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn-add no-print" onclick="addRow('tbl-lineas')" style="margin-top:10px; width:100%; background:#e2e8f0; border:1px dashed #999;">+ Agregar Fila</button>
+        </div>
+        <div class="footer">FO-LC-15 | Histórico Líneas | Xelle Scientific</div>
+    </div>
+    <script>
+        function addRow(id) {
+            const t = document.getElementById(id).getElementsByTagName('tbody')[0];
+            const r = t.rows[0].cloneNode(true);
+            r.querySelectorAll('input').forEach(i=>i.value='');
+            t.appendChild(r);
+        }
+    </script>
+</body>
+</html>
