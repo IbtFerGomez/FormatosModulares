@@ -30,7 +30,7 @@ const App = {
             case 'doc-fo-lc-21': this.Docs.FO_LC_21.init(); break;
             case 'doc-fo-lc-22': this.Docs.FO_LC_22.init(); break;
             case 'doc-fo-lc-24': this.Docs.FO_LC_24.init(); break;
-            case 'doc-fo-lc-40': case 'doc-fo-lc-41': case 'doc-fo-lc-42': case 'doc-fo-lc-43': case 'doc-fo-lc-44': case 'doc-fo-lc-45':
+            case 'doc-fo-lc-40': case 'doc-fo-lc-40-b': case 'doc-fo-lc-41': case 'doc-fo-lc-42': case 'doc-fo-lc-43': case 'doc-fo-lc-44': case 'doc-fo-lc-45':
                 this.Docs.FO_Generic.init(docId); break;
         }
     },
