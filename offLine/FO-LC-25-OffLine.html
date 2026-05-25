@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-25 Dosificación de Exosomas</title>
+    <link rel="stylesheet" href="format-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="format-app.js"></script>
+    <style>
+        .bg-totals {
+            background-color: #e8f8f5;
+            font-weight: bold;
+        }
+
+        .readonly-input {
+            background-color: #f1f5f9 !important;
+            border: none !important;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+
+        .manual-input {
+            background-color: #e8f8f5 !important;
+            border: 1px solid #94a3b8 !important;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            padding: 4px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .header-info-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 0.8fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #eee;
+            align-items: center;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+        .footer { text-align: center; font-size: 8px; color: #64748b; margin-top: 20px; padding-top: 10px; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+
+<body id="doc-fo-lc-25">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+    </div>
+
+    <div class="container">
+        <div class="header-top">
+            <div class="logo-container">
+                <svg viewBox="0 0 320 80">
+                    <g transform="translate(0, -2) scale(0.85)">
+                        <circle fill="#2E9D82" cx="25" cy="25" r="13" />
+                        <circle fill="#2E9D82" cx="75" cy="75" r="13" />
+                        <path fill="#2E9D82"
+                            d="M15.81,65.81C28.54,53.08 33.74,59.19 46.46,46.46C59.19,33.74 53.08,28.54 65.81,15.81A13 13 0 1 1 84.19,34.19C71.46,46.92 66.26,40.81 53.54,53.54C40.81,66.26 46.92,71.46 34.19,84.19A13 13 0 1 1 15.81,65.81Z" />
+                    </g>
+                    <text x="90" y="42" font-family="Arial Black" font-size="34" fill="#1D1D1B">XELLE</text>
+                    <text x="91" y="68" font-family="Arial" font-size="19" font-weight="700" fill="#1D1D1B"
+                        letter-spacing="2">SCIENTIFIC</text>
+                </svg>
+            </div>
+            <div class="registry-container">
+                <label>Folio Dosificación</label>
+                <div class="registry-wrapper">
+                    <span class="registry-prefix">FO-LC-25-</span>
+                    <input type="text" id="reg-25" class="registry-input generate-barcode" data-target="barcode-25"
+                        data-prefix="FO-LC-25-" placeholder="000">
+                </div>
+                <svg id="barcode-25" class="barcode-svg"></svg>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <h1>FORMATO REGISTRO DIARIO DE DOSIFICACIÓN DE EXOSOMAS</h1>
+            <div class="metadata">Código: FO-LC-25 | Versión: 1.2 | Vigencia: MAR 2026 | Página: 1 de 1</div>
+        </div>
+
+        <div class="header-info-grid">
+            <div>
+                <strong>Lote de Exos Usado (Fecha):</strong><br>
+                <input type="text" id="fecha_lote_exo" class="cedit" oninput="updateAllCodes()" placeholder="AAAA-MM-DD" style="width: 100%;">
+            </div>
+            <div>
+                <strong>Operador (Inits):</strong><br>
+                <input type="text" id="operador_init" class="cedit" placeholder="Ej: FG" oninput="updateAllCodes()"
+                    style="width: 100%; text-transform: uppercase;">
+            </div>
+            <div>
+                <strong>Fecha Op:</strong><br>
+                <input type="text" id="fecha_op" class="cedit" placeholder="AAAA-MM-DD" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">1. INSUMOS Y REACTIVOS UTILIZADOS</div>
+            <table id="tbl-insumos" class="compact-table">
+                <thead>
+                    <tr>
+                        <th width="15%">ID Insumo</th>
+                        <th width="25%">Nombre del Insumo</th>
+                        <th width="20%">Marca</th>
+                        <th width="20%">Lote</th>
+                        <th width="15%">Caducidad</th>
+                        <th width="5%" class="no-print"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input class="cedit" placeholder="ID..."></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="AAAA-MM-DD"></td>
+                        <td class="no-print"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addRow('tbl-insumos')">+ Agregar Insumo</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title">2. DETALLE DE DOSIFICACIÓN</div>
+            <table id="tbl-dosis" class="compact-table">
+                <thead>
+                    <tr>
+                        <th width="3%">#</th>
+                        <th width="12%">Presentación</th>
+                        <th width="8%">Vol. Exo (mL)</th>
+                        <th width="8%">Sol. Salina (mL)</th>
+                        <th width="35%">CÓDIGO DE LOTE (LOT)</th>
+                        <th width="12%">CADUCIDAD</th>
+                        <th width="18%">Observaciones</th>
+                        <th width="4%" class="no-print"></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-dosis">
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addDosisRow()">+ Agregar Dosis</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title">3. BALANCE FINAL</div>
+            <table class="compact-table text-center" style="max-width: 600px; margin: 0 auto;">
+                <thead>
+                    <tr>
+                        <th>Total Viales</th>
+                        <th>Total Vol. Exo (mL)</th>
+                        <th>Total Sol. Salina (mL)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-totals">
+                        <td><input id="total-viales" class="manual-input" type="number" value="0" placeholder="Total viales"></td>
+                        <td><input id="total-ml-exo" class="manual-input" type="number" step="0.1" value="0" placeholder="Total mL Exo"></td>
+                        <td><input id="total-ml-salina" class="manual-input" type="number" step="0.1" value="0" placeholder="Total mL Salina"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="signature-area">
+            <div class="signature-box">
+                <p>Preparó:</p><input class="cedit" placeholder="Firma">
+            </div>
+            <div class="signature-box">
+                <p>Verificó:</p><input class="cedit" placeholder="Firma">
+            </div>
+            <div class="signature-box">
+                <p>Autorizó:</p><input class="cedit" placeholder="Firma">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addRow(tableId) {
+            const tbody = document.getElementById(tableId).querySelector('tbody');
+            const row = tbody.rows[0].cloneNode(true);
+            row.querySelectorAll('input').forEach(i => i.value = '');
+            row.cells[row.cells.length - 1].innerHTML = '<button class="btn btn-danger btn-mini" onclick="this.closest(\'tr\').remove()">x</button>';
+            tbody.appendChild(row);
+        }
+
+        function addDosisRow() {
+            const tbody = document.getElementById('tbody-dosis');
+            const idx = tbody.rows.length + 1;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="text-center row-idx">${idx}</td>
+                <td><input class="cedit inp-pres" placeholder="Ej: 1B, 3B, 15B..." oninput="updateAllCodes()"></td>
+                <td><input type="number" step="0.1" class="cedit inp-ml-exo text-center" oninput="calculateTotals()"></td>
+                <td><input type="number" step="0.1" class="cedit inp-ml-salina text-center" oninput="calculateTotals()"></td>
+                <td><input class="readonly-input inp-lote" style="text-align:left; padding-left:10px;" readonly></td>
+                <td><input class="cedit text-center" placeholder="MES AAAA"></td>
+                <td><input class="cedit"></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove(); calculateTotals(); updateRowNumbers();">x</button></td>
+            `;
+            tbody.appendChild(tr);
+            calculateTotals();
+        }
+
+        function updateAllCodes() {
+            const fechaLote = document.getElementById('fecha_lote_exo').value;
+            const op = document.getElementById('operador_init').value.toUpperCase() || "XX";
+            if (!fechaLote) return;
+
+            const fCode = fechaLote.replace(/-/g, '').substring(2);
+            const rows = document.querySelectorAll('#tbody-dosis tr');
+
+            rows.forEach((row, index) => {
+                const presInput = row.querySelector('.inp-pres');
+                const pres = presInput ? presInput.value.toUpperCase() || "00B" : "00B";
+                const num = (index + 1).toString().padStart(2, '0');
+                row.querySelector('.inp-lote').value = `EXO${fCode}-${pres}-${op}-${num}`;
+            });
+        }
+
+        function calculateTotals() {
+            // Función deshabilitada - ahora los totales son de llenado manual
+            // Los usuarios pueden calcular y escribir manualmente los totales
+        }
+
+        function updateRowNumbers() {
+            const rows = document.querySelectorAll('#tbody-dosis tr');
+            rows.forEach((r, i) => r.querySelector('.row-idx').innerText = i + 1);
+            updateAllCodes();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha_op').placeholder = 'AAAA-MM-DD';
+            addDosisRow();
+        });
+    </script>
+    <div class="footer">FO-LC-25 | Versión: 1.2 | FORMATO REGISTRO DIARIO DE DOSIFICACIÓN DE EXOSOMAS | Xelle Scientific | Página 1 de 1<br>El contenido de este documento es propiedad de &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que está prohibida su reproducción total o parcial.</div>
+</body>
+
+</html>

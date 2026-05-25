@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-23 Bitácora Crio</title>
+    <link rel="stylesheet" href="format-styles-OffLine.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="format-app-OffLine.js"></script>
+    <style>
+        .header-top {
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-top .logo-container {
+            flex: 0 0 auto;
+        }
+
+        .header-top .title-container {
+            flex: 1;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .header-top .title-container h1 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .header-top .title-container .metadata {
+            font-size: 9px;
+            margin: 2px 0;
+        }
+
+        .header-top .registry-container {
+            flex: 0 0 auto;
+        }
+
+        .barcode-svg {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        .signature-area {
+            margin-top: 8px;
+            padding: 8px 0;
+        }
+
+        .signature-box {
+            padding: 4px;
+        }
+
+        .signature-box p {
+            margin: 2px 0;
+            font-size: 10px;
+        }
+
+        /* Estilos para encabezados agrupados */
+        .group-header {
+            background-color: #f0f4f8;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ccc !important;
+        }
+
+        .sub-header th {
+            font-size: 9px;
+            background-color: #fafafa;
+            vertical-align: middle !important;
+            padding: 2px 4px;
+            /* Reducir padding para ajustar anchos */
+        }
+
+        @media print {
+            @page {
+                size: letter landscape;
+                margin: 0.5cm;
+            }
+
+            /* Forzar impresión exacta de colores */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body,
+            .container {
+                margin: 0 !important;
+                padding: 10px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* Reducir espacios en impresión */
+            .header-top {
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+            }
+
+            .header-top .logo-container {
+                flex: 0 0 auto !important;
+            }
+
+            .header-top .title-container {
+                flex: 1 !important;
+                text-align: center !important;
+                padding: 0 10px !important;
+            }
+
+            .header-top .title-container h1 {
+                margin: 5px 0 2px 0 !important;
+                padding: 0 !important;
+                font-size: 18px !important;
+            }
+
+            .header-top .title-container .metadata {
+                font-size: 9px !important;
+                margin: 2px 0 !important;
+            }
+
+            .header-top .registry-container {
+                flex: 0 0 auto !important;
+            }
+
+            .barcode-svg {
+                margin-bottom: 0 !important;
+                margin-top: 0 !important;
+                padding: 0 !important;
+            }
+
+            .registry-container {
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            .registry-date {
+                margin-bottom: 0 !important;
+            }
+
+            /* Reducir espacio de firmas */
+            .signature-area {
+                margin-top: 5px !important;
+                padding: 5px 0 !important;
+            }
+
+            .signature-box {
+                padding: 3px !important;
+            }
+
+            .signature-box p {
+                margin: 1px 0 !important;
+                font-size: 9px !important;
+            }
+
+            .signature-box input {
+                height: 30px !important;
+                margin: 2px 0 !important;
+            }
+
+            /* Permitir que las tablas y secciones se partan entre páginas */
+            .section {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            table,
+            .compact-table {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+                width: 100% !important;
+                table-layout: fixed !important;
+            }
+
+            tbody {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .section-title {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid #000 !important;
+                border-collapse: collapse !important;
+            }
+
+            /* Mantener colores de encabezados de grupo */
+            .group-header {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                font-weight: bold !important;
+            }
+
+            .sub-header th {
+                background-color: #fafafa !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Mantener anchos de columna */
+            th[width],
+            td[width] {
+                width: attr(width) !important;
+            }
+
+            input {
+                border: none !important;
+                background: transparent !important;
+            }
+
+            input::placeholder {
+                color: transparent !important;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body id="doc-fo-lc-23">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
+        <button class="btn btn-danger" onclick="clearForm()">Limpiar</button>
+    </div>
+
+    <div class="container">
+        <div class="header-top">
+            <div class="logo-container">
+                <svg viewBox="0 0 320 80">
+                    <defs>
+                        <style>
+                            .svg-logo-titulo {
+                                font-family: 'Arial Black', sans-serif;
+                                font-weight: 900;
+                                fill: #1D1D1B
+                            }
+
+                            .svg-logo-subtitulo {
+                                font-family: 'Arial', sans-serif;
+                                font-weight: 700;
+                                fill: #1D1D1B;
+                                letter-spacing: 2px
+                            }
+
+                            .svg-logo-celula {
+                                fill: #2E9D82
+                            }
+                        </style>
+                    </defs>
+                    <g transform="translate(0, -2) scale(0.85)">
+                        <circle class="svg-logo-celula" cx="25" cy="25" r="13" />
+                        <circle class="svg-logo-celula" cx="75" cy="75" r="13" />
+                        <path class="svg-logo-celula"
+                            d="M15.81,65.81C28.54,53.08 33.74,59.19 46.46,46.46C59.19,33.74 53.08,28.54 65.81,15.81A13 13 0 1 1 84.19,34.19C71.46,46.92 66.26,40.81 53.54,53.54C40.81,66.26 46.92,71.46 34.19,84.19A13 13 0 1 1 15.81,65.81Z" />
+                    </g><text x="90" y="42" class="svg-logo-titulo" font-size="34">XELLE</text><text x="91" y="68"
+                        class="svg-logo-subtitulo" font-size="19">SCIENTIFIC</text><text x="215" y="35"
+                        font-family="Arial" font-size="10" fill="#1D1D1B">®</text>
+                </svg>
+            </div>
+            <div class="title-container">
+                <h1>BITÁCORA DE CRIOPRESERVACIÓN</h1>
+                <div class="metadata">Código: FO-LC-23 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
+            </div>
+            <div class="registry-container">
+                <label>No. Folio</label>
+                <div class="registry-wrapper">
+                    <span class="registry-prefix">FO-LC-23-</span>
+                    <input type="text" class="registry-input generate-barcode" data-target="barcode-fo-lc-23"
+                        data-prefix="FO-LC-23-">
+                </div>
+                <input type="text" class="registry-date" placeholder="DD/MM/AAAA">
+                <svg id="barcode-fo-lc-23" class="barcode-svg"></svg>
+            </div>
+        </div>
+
+        <div class="section">
+            <table id="tbl-bitacora" class="compact-table">
+                <thead>
+                    <tr>
+                        <th colspan="7" class="group-header" style="background-color: #e8f6f3;">ENTRADA</th>
+                        <th colspan="3" class="group-header" style="background-color: #fdedec;">SALIDA</th>
+                        <th rowspan="2" class="no-print" width="2%"></th>
+                    </tr>
+                    <tr class="sub-header">
+                        <th width="9%">Código CV</th>
+                        <th width="9%">Origen</th>
+                        <th width="4%">Pas.</th>
+                        <th width="9%">F. Proceso</th>
+                        <th width="9%">F. Almacén</th>
+                        <th width="8%">ID Ubicación</th>
+                        <th width="9%">Responsable</th>
+
+                        <th width="9%">F. Salida</th>
+                        <th width="12%">Destino / Motivo</th>
+                        <th width="9%">Responsable</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-bitacora"></tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addCryoRow()">+ Agregar Fila</button>
+        </div>
+
+        <div class="signature-area">
+            <div class="signature-box">
+                <p>Revisó (Calidad):</p><input type="text">
+                <p>Firma</p>
+            </div>
+            <div class="signature-box">
+                <p>Supervisó (Producción):</p><input type="text">
+                <p>Firma</p>
+            </div>
+        </div>
+        <div class="footer">FO-LC-23 | BITÁCORA CRIO | Versión: 1.0<br>El contenido de este documento es propiedad de
+            &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que
+            está prohibida su reproducción total o parcial.</div>
+    </div>
+
+    <script>
+        function addCryoRow() {
+            const tbody = document.getElementById('tbody-bitacora');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td><input class="cedit" placeholder="CV..."></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit" style="text-align:center;"></td>
+                <td><input type="text" class="cedit date-proc" placeholder="DD/MM/AAAA" onchange="calcStorageDate(this)"></td>
+                <td><input type="text" class="cedit date-store" placeholder="DD/MM/AAAA"></td>
+                <td><input class="cedit" placeholder="Tanque/Caja"></td>
+                <td><input class="cedit" placeholder="Firma/Nom"></td>
+                
+                <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                <td><input class="cedit" placeholder="Destino/Motivo"></td>
+                <td><input class="cedit" placeholder="Firma/Nom"></td>
+                
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">x</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        // Calcular Fecha Almacenamiento (Fecha Proceso + 1 día)
+        function calcStorageDate(inputDate) {
+            const row = inputDate.closest('tr');
+            const val = inputDate.value;
+            if (!val) return;
+
+            // Intentar parsear formato DD/MM/AAAA
+            const parts = val.split('/');
+            if (parts.length !== 3) return;
+
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1; // Los meses en JS son 0-indexados
+            const year = parseInt(parts[2], 10);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year)) return;
+
+            const dateObj = new Date(year, month, day);
+            // Sumar 1 día
+            dateObj.setDate(dateObj.getDate() + 1);
+
+            // Formatear a DD/MM/AAAA
+            const dd = String(dateObj.getDate()).padStart(2, '0');
+            const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const yyyy = dateObj.getFullYear();
+
+            const nextDay = `${dd}/${mm}/${yyyy}`;
+
+            // Asignar solo si está vacío para respetar manuales
+            const storeInput = row.querySelector('.date-store');
+            if (!storeInput.value) {
+                storeInput.value = nextDay;
+            }
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('tbody-bitacora').children.length === 0) {
+                addCryoRow();
+            }
+        });
+    </script>
+</body>
+
+</html>

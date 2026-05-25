@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>FO-OP-15 Pedido Maestro</title>
-    <link rel="stylesheet" href="format-styles-comercial.css">
+    <link rel="stylesheet" id="op-styles" href="format-styles-operaciones.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="format-app-comercial.js"></script>
+    <script>
+        (function () {
+            const styleEl = document.getElementById('op-styles');
+            const styleCandidates = [
+                'format-styles-operaciones.css',
+                '/formats/format-styles-operaciones.css'
+            ];
+            let styleIndex = 0;
+
+            styleEl.addEventListener('error', function () {
+                styleIndex += 1;
+                if (styleIndex < styleCandidates.length) {
+                    styleEl.href = styleCandidates[styleIndex];
+                }
+            });
+
+            const scriptCandidates = [
+                'format-app-operaciones.js',
+                '/formats/format-app-operaciones.js'
+            ];
+            let scriptIndex = 0;
+
+            const loadScript = function () {
+                if (scriptIndex >= scriptCandidates.length) return;
+                const script = document.createElement('script');
+                script.src = scriptCandidates[scriptIndex++];
+                script.onerror = loadScript;
+                document.head.appendChild(script);
+            };
+
+            loadScript();
+        })();
+    </script>
     <style>
         /* Estilo para fijar el footer al final de la hoja en impresión */
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
         @media print {
             .footer {
                 position: fixed;
@@ -22,32 +64,92 @@
                 font-size: 9px !important;
                 color: #000 !important;
             }
-            body { padding-bottom: 50px; }
-            .no-print { display: none !important; }
+
+            body {
+                padding-bottom: 50px;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* Permitir que las tablas y secciones se partan entre páginas */
+            .section {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            table,
+            .compact-table {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tr,
+            tbody tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .section-title {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
         }
     </style>
 </head>
+
 <body id="doc-fo-op-15">
     <div class="global-controls no-print">
         <button class="btn btn-success" onclick="saveForm()">Guardar</button>
         <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
-        <button class="btn btn-danger" onclick="clearForm()">Limpiar</button>
+        <button class="btn btn-warning" onclick="toggleOfflineMode()" id="btn-offline">Modo Offline</button>
     </div>
 
     <div class="container">
         <div class="header-top">
             <div class="logo-container">
-                <svg viewBox="0 0 320 80"><defs><style>.svg-logo-titulo{font-family:'Arial Black',sans-serif;font-weight:900;fill:#1D1D1B}.svg-logo-subtitulo{font-family:'Arial',sans-serif;font-weight:700;fill:#1D1D1B;letter-spacing:2px}.svg-logo-celula{fill:#2E9D82}</style></defs><g transform="translate(0, -2) scale(0.85)"><circle class="svg-logo-celula" cx="25" cy="25" r="13"/><circle class="svg-logo-celula" cx="75" cy="75" r="13"/><path class="svg-logo-celula" d="M15.81,65.81C28.54,53.08 33.74,59.19 46.46,46.46C59.19,33.74 53.08,28.54 65.81,15.81A13 13 0 1 1 84.19,34.19C71.46,46.92 66.26,40.81 53.54,53.54C40.81,66.26 46.92,71.46 34.19,84.19A13 13 0 1 1 15.81,65.81Z"/></g><text x="90" y="42" class="svg-logo-titulo" font-size="34">XELLE</text><text x="91" y="68" class="svg-logo-subtitulo" font-size="19">SCIENTIFIC</text><text x="215" y="35" font-family="Arial" font-size="10" fill="#1D1D1B">®</text></svg>
+                <svg viewBox="0 0 320 80">
+                    <defs>
+                        <style>
+                            .svg-logo-titulo {
+                                font-family: 'Arial Black', sans-serif;
+                                font-weight: 900;
+                                fill: #1D1D1B
+                            }
+
+                            .svg-logo-subtitulo {
+                                font-family: 'Arial', sans-serif;
+                                font-weight: 700;
+                                fill: #1D1D1B;
+                                letter-spacing: 2px
+                            }
+
+                            .svg-logo-celula {
+                                fill: #2E9D82
+                            }
+                        </style>
+                    </defs>
+                    <g transform="translate(0, -2) scale(0.85)">
+                        <circle class="svg-logo-celula" cx="25" cy="25" r="13" />
+                        <circle class="svg-logo-celula" cx="75" cy="75" r="13" />
+                        <path class="svg-logo-celula"
+                            d="M15.81,65.81C28.54,53.08 33.74,59.19 46.46,46.46C59.19,33.74 53.08,28.54 65.81,15.81A13 13 0 1 1 84.19,34.19C71.46,46.92 66.26,40.81 53.54,53.54C40.81,66.26 46.92,71.46 34.19,84.19A13 13 0 1 1 15.81,65.81Z" />
+                    </g><text x="90" y="42" class="svg-logo-titulo" font-size="34">XELLE</text><text x="91" y="68"
+                        class="svg-logo-subtitulo" font-size="19">SCIENTIFIC</text><text x="215" y="35"
+                        font-family="Arial" font-size="10" fill="#1D1D1B">®</text>
+                </svg>
             </div>
             <div class="registry-container">
                 <label>No. Pedido (PV)</label>
                 <div class="registry-wrapper">
                     <span class="registry-prefix">FO-OP-15-</span>
-                    <input type="text" id="reg-op-15" 
-                           class="registry-input generate-barcode" 
-                           data-target="barcode-op-15" 
-                           data-prefix="FO-OP-15-" 
-                           placeholder="001">
+                    <input type="text" id="reg-op-15" class="registry-input generate-barcode"
+                        data-target="barcode-op-15" data-prefix="FO-OP-15-" placeholder="001">
                 </div>
                 <input type="date" class="registry-date no-auto-date">
                 <svg id="barcode-op-15" class="barcode-svg"></svg>
@@ -55,16 +157,17 @@
         </div>
 
         <div class="header-main">
-            <h1>REGISTRO MAESTRO DE PEDIDO (VENTAS)</h1>
-            <div class="metadata">Código: FO-OP-15 | Versión: 1.0 | Vig: Ene2026</div>
+            <h1>REGISTRO MAESTRO DE PEDIDO (OPERACIONES)</h1>
+            <div class="metadata">Código: FO-OP-15 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
         </div>
 
         <div class="section">
-            <div class="section-title">1. Trazabilidad Comercial (Origen)</div>
+            <div class="section-title">1. Trazabilidad de Operaciones (Origen)</div>
             <table class="no-border-table">
                 <tr>
                     <td width="33%"><strong>Ref. Cotización:</strong> <input class="cedit" placeholder="COT-XXXX"></td>
-                    <td width="33%"><strong>Orden de Compra (Cliente):</strong> <input class="cedit" placeholder="OC-XXXX"></td>
+                    <td width="33%"><strong>Orden de Compra (Cliente):</strong> <input class="cedit"
+                            placeholder="OC-XXXX"></td>
                     <td width="33%"><strong>Vendedor:</strong> <input class="cedit"></td>
                 </tr>
             </table>
@@ -111,14 +214,113 @@
         </div>
 
         <div class="signature-area">
-            <div class="signature-box"><p>Ejecutivo Ventas:</p><input type="text"><p>Firma</p></div>
-            <div class="signature-box"><p>Autorizó (Gerencia):</p><input type="text"><p>Firma</p></div>
+            <div class="signature-box">
+                <p>Ejecutó (Ejecutivo de Operaciones):</p><input type="text">
+                <p>Firma</p>
+            </div>
+            <div class="signature-box">
+                <p>Revisó (Coordinación de Operaciones):</p><input type="text">
+                <p>Firma</p>
+            </div>
+            <div class="signature-box">
+                <p>Autorizó (Gerencia de Operaciones):</p><input type="text">
+                <p>Firma</p>
+            </div>
         </div>
 
-        <div class="footer">
-            FO-OP-15 | Versión: 1.0 | Vigente a partir de: Enero2026<br>
-            El contenido de este documento es propiedad de “Xelle Scientific”.
-        </div>
+        <div class="footer">FO-OP-15 | PEDIDO MAESTRO | Versión: 1.0<br>El contenido de este documento es propiedad de &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que está prohibida su reproducción total o parcial.</div>
     </div>
+    <script>
+        let isOfflineMode = false;
+
+        function toggleOfflineMode() {
+            isOfflineMode = !isOfflineMode;
+            const btn = document.getElementById('btn-offline');
+            if (isOfflineMode) {
+                btn.textContent = 'Modo Online';
+                btn.style.backgroundColor = '#f59e0b';
+
+                // Convertir <select> a <input type="text">
+                document.querySelectorAll('select.cedit').forEach(sel => {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = sel.className;
+                    input.value = sel.options[sel.selectedIndex]?.text || '';
+                    input.setAttribute('data-original-type', 'select');
+                    if (sel.style.cssText) input.style.cssText = sel.style.cssText;
+                    const options = Array.from(sel.options).map(opt => opt.text).join('|');
+                    input.setAttribute('data-select-options', options);
+                    sel.parentNode.replaceChild(input, sel);
+                });
+
+                // Convertir <input type="date"> a <input type="text">
+                document.querySelectorAll('input[type="date"].cedit, input[type="date"].registry-date').forEach(inp => {
+                    inp.setAttribute('data-original-type', 'date');
+                    inp.type = 'text';
+                    inp.placeholder = 'DD/MM/AAAA';
+                });
+
+                // Convertir <input type="time"> a <input type="text">
+                document.querySelectorAll('input[type="time"].cedit').forEach(inp => {
+                    inp.setAttribute('data-original-type', 'time');
+                    inp.type = 'text';
+                    inp.placeholder = 'HH:MM';
+                });
+
+                // Convertir <input type="number"> a <input type="text">
+                document.querySelectorAll('input[type="number"].cedit').forEach(inp => {
+                    inp.setAttribute('data-original-type', 'number');
+                    const currentPlaceholder = inp.placeholder;
+                    inp.type = 'text';
+                    if (currentPlaceholder) inp.placeholder = currentPlaceholder;
+                });
+            } else {
+                btn.textContent = 'Modo Offline';
+                btn.style.backgroundColor = '';
+
+                // Restaurar <select> desde <input type="text">
+                document.querySelectorAll('input[data-original-type="select"]').forEach(inp => {
+                    const sel = document.createElement('select');
+                    sel.className = inp.className;
+                    if (inp.style.cssText) sel.style.cssText = inp.style.cssText;
+                    const options = inp.getAttribute('data-select-options')?.split('|') || [];
+                    options.forEach(optText => {
+                        const opt = document.createElement('option');
+                        opt.text = optText;
+                        sel.appendChild(opt);
+                    });
+                    const currentValue = inp.value;
+                    for (let i = 0; i < sel.options.length; i++) {
+                        if (sel.options[i].text === currentValue) {
+                            sel.selectedIndex = i;
+                            break;
+                        }
+                    }
+                    inp.parentNode.replaceChild(sel, inp);
+                });
+
+                // Restaurar <input type="date">
+                document.querySelectorAll('input[data-original-type="date"]').forEach(inp => {
+                    inp.type = 'date';
+                    inp.placeholder = '';
+                    inp.removeAttribute('data-original-type');
+                });
+
+                // Restaurar <input type="time">
+                document.querySelectorAll('input[data-original-type="time"]').forEach(inp => {
+                    inp.type = 'time';
+                    inp.placeholder = '';
+                    inp.removeAttribute('data-original-type');
+                });
+
+                // Restaurar <input type="number">
+                document.querySelectorAll('input[data-original-type="number"]').forEach(inp => {
+                    inp.type = 'number';
+                    inp.removeAttribute('data-original-type');
+                });
+            }
+        }
+    </script>
 </body>
+
 </html>

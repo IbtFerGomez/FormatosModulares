@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-21 Bitácora</title>
+    <link rel="stylesheet" href="format-styles-OffLine.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="format-app-OffLine.js"></script>
+    <style>
+        /* Estilos para campos autogenerados */
+        .auto-code {
+            background-color: #f0f4f8;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 11px;
+        }
+
+        .footnote {
+            font-size: 10px;
+            color: #555;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        @media print {
+
+            .global-controls,
+            .no-print {
+                display: none !important;
+            }
+
+            ::-webkit-input-placeholder {
+                color: transparent !important;
+            }
+
+            :-moz-placeholder {
+                color: transparent !important;
+            }
+
+            ::-moz-placeholder {
+                color: transparent !important;
+            }
+
+            :-ms-input-placeholder {
+                color: transparent !important;
+            }
+
+            ::placeholder {
+                color: transparent !important;
+            }
+
+            /* Permitir que las tablas y secciones se partan entre páginas */
+            .section {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            table,
+            .compact-table {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tr,
+            tbody tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .section-title {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body id="doc-fo-lc-21">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
+        <button class="btn btn-danger" onclick="clearForm()">Limpiar</button>
+    </div>
+
+    <div class="container">
+        <div class="header-top">
+            <div class="logo-container">
+                <svg viewBox="0 0 320 80">
+                    <defs>
+                        <style>
+                            .svg-logo-titulo {
+                                font-family: 'Arial Black', sans-serif;
+                                font-weight: 900;
+                                fill: #1D1D1B
+                            }
+
+                            .svg-logo-subtitulo {
+                                font-family: 'Arial', sans-serif;
+                                font-weight: 700;
+                                fill: #1D1D1B;
+                                letter-spacing: 2px
+                            }
+
+                            .svg-logo-celula {
+                                fill: #2E9D82
+                            }
+                        </style>
+                    </defs>
+                    <g transform="translate(0, -2) scale(0.85)">
+                        <circle class="svg-logo-celula" cx="25" cy="25" r="13" />
+                        <circle class="svg-logo-celula" cx="75" cy="75" r="13" />
+                        <path class="svg-logo-celula"
+                            d="M15.81,65.81C28.54,53.08 33.74,59.19 46.46,46.46C59.19,33.74 53.08,28.54 65.81,15.81A13 13 0 1 1 84.19,34.19C71.46,46.92 66.26,40.81 53.54,53.54C40.81,66.26 46.92,71.46 34.19,84.19A13 13 0 1 1 15.81,65.81Z" />
+                    </g><text x="90" y="42" class="svg-logo-titulo" font-size="34">XELLE</text><text x="91" y="68"
+                        class="svg-logo-subtitulo" font-size="19">SCIENTIFIC</text><text x="215" y="35"
+                        font-family="Arial" font-size="10" fill="#1D1D1B">®</text>
+                </svg>
+            </div>
+            <div class="registry-container">
+                <label>Folio Bitácora</label>
+                <div class="registry-wrapper">
+                    <span class="registry-prefix">FO-LC-21-</span>
+                    <input type="text" id="reg-21" class="registry-input generate-barcode" data-target="barcode-21"
+                        data-prefix="FO-LC-21-">
+                </div>
+                <input type="text" class="registry-date" placeholder="DD/MM/AAAA">
+                <svg id="barcode-21" class="barcode-svg"></svg>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <h1>FORMATO BITÁCORA DE CULTIVO Y MANTENIMIENTO CELULAR.</h1>
+            <div class="metadata">Código: FO-LC-21 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">1. Insumos y Reactivos del Día</div>
+            <table id="tabla-insumos-dia">
+                <thead>
+                    <tr>
+                        <th width="28%">Insumo</th>
+                        <th width="23%">Marca</th>
+                        <th width="23%">Lote</th>
+                        <th width="18%">Caducidad</th>
+                        <th width="8%" class="no-print">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input class="cedit" value="Medio Completo (MC)"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit" value="DPBS"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit" value="DMSO"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit" value="ENZYMA TRYPLE"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit" placeholder="OTROS (Especifique)..."></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addRowInsumos()" style="margin-top:5px;">+
+                Agregar Insumo</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                2. Gestión de Unidades de Cultivo (Flasks Activos)
+            </div>
+            <table id="tabla-flasks" class="compact-table">
+                <thead>
+                    <tr>
+                        <th width="16%">CÓDIGO FLASK</th>
+                        <th width="11%">Línea</th>
+                        <th width="5%">Pasaje</th>
+                        <th width="9%">Fecha</th>
+                        <th width="4%">#</th>
+                        <th width="9%">Recipiente</th>
+                        <th width="4%">Inc</th>
+                        <th width="7%">Cant. (M)</th>
+                        <th width="7%">Viab %</th>
+                        <th width="11%">Estado</th>
+                        <th width="8%" class="no-print">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-flasks">
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addRowFlasks()" style="margin-top:5px;">+ Agregar
+                Flask</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title">3. Nuevos Flasks (Resultados Subcultivo)</div>
+            <table id="tabla-nuevos-flasks" class="compact-table">
+                <thead>
+                    <tr>
+                        <th width="14%">Flask/Criovial Origen</th>
+                        <th width="7%">Línea</th>
+                        <th width="5%">Pasaje</th>
+                        <th width="9%">Recipiente</th>
+                        <th width="4%">#</th>
+                        <th width="18%">CÓDIGO</th>
+                        <th width="9%">Cant. Sembrada</th>
+                        <th width="9%">Incubadora</th>
+                        <th width="8%" class="no-print">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-nuevos">
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addRowNuevos()" style="margin-top:5px;">+ Agregar
+                Subcultivo</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title">4. Resumen de Cosechas (Salidas)</div>
+            <table id="tabla-cosechas" class="compact-table">
+                <thead>
+                    <tr>
+                        <th width="18%">Flask Origen</th>
+                        <th width="14%">Cosecha Final Aprox.</th>
+                        <th width="14%">Conteo Real</th>
+                        <th width="18%">Destino</th>
+                        <th width="23%">Código Destino*</th>
+                        <th width="8%" class="no-print">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-cosechas">
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                    <tr>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td><input class="cedit"></td>
+                        <td class="no-print"><button class="btn btn-danger btn-mini"
+                                onclick="this.closest('tr').remove()">✕</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addRowCosechas()" style="margin-top:5px;">+
+                Agregar Cosecha</button>
+            <div class="footnote">* CRIOVIAL, FLASK, DOSIS.</div>
+        </div>
+
+        <div class="signature-area">
+            <div class="signature-box">
+                <p>Realizó:</p><input type="text">
+                <p>Firma</p>
+            </div>
+            <div class="signature-box">
+                <p>Verificó:</p><input type="text">
+                <p>Firma</p>
+            </div>
+        </div>
+        <div class="footer">FO-LC-21 | BITÁCORA | Versión: 1.0<br>El contenido de este documento es propiedad de
+            &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que
+            está prohibida su reproducción total o parcial.</div>
+    </div>
+
+    <script>
+        // Función para agregar fila en Insumos
+        function addRowInsumos() {
+            const tbody = document.querySelector('#tabla-insumos-dia tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input class="cedit" placeholder="Nombre del insumo..."></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">✕</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        // Función para agregar fila en Flasks
+        function addRowFlasks() {
+            const tbody = document.getElementById('tbody-flasks');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">✕</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        // Función para agregar fila en Nuevos Flasks
+        function addRowNuevos() {
+            const tbody = document.getElementById('tbody-nuevos');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">✕</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        // Función para agregar fila en Cosechas
+        function addRowCosechas() {
+            const tbody = document.getElementById('tbody-cosechas');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td><input class="cedit"></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">✕</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+    </script>
+</body>
+
+</html>

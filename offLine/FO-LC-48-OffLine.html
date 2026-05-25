@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-48 Resultados y Dictamen de Lote</title>
+    <link rel="stylesheet" href="format-styles-OffLine.css">
+    <script src="JsBarcode.all.min.js"></script>
+    <script src="format-app-OffLine.js"></script>
+    <style>
+        .section-header {
+            background-color: #1E3A5F;
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 12px;
+            border-radius: 4px;
+        }
+
+        /* Estilos específicos para FO-LC-48 - Tamaño más grande para impresión */
+        #doc-fo-lc-48 .container {
+            font-size: 13px;
+        }
+
+        #doc-fo-lc-48 .header-main h1 {
+            font-size: 17px;
+        }
+
+        #doc-fo-lc-48 .metadata {
+            font-size: 11px;
+        }
+
+        #doc-fo-lc-48 table th {
+            font-size: 11px;
+            padding: 6px;
+        }
+
+        #doc-fo-lc-48 table td {
+            font-size: 12px;
+            padding: 6px;
+        }
+
+        #doc-fo-lc-48 .cedit {
+            font-size: 12px;
+            padding: 4px;
+        }
+
+        #doc-fo-lc-48 strong {
+            font-size: 13px;
+        }
+
+        #doc-fo-lc-48 .signature-box p {
+            font-size: 11px;
+        }
+
+        @media print {
+            @page {
+                size: portrait;
+                margin: 0.8cm 0.5cm;
+            }
+
+            #doc-fo-lc-48 body {
+                font-size: 11px;
+            }
+
+            #doc-fo-lc-48 .container {
+                transform: scale(0.98);
+                transform-origin: top center;
+                padding: 15px 25px;
+            }
+
+            #doc-fo-lc-48 .header-main h1 {
+                font-size: 15px;
+                margin: 3px 0;
+            }
+
+            #doc-fo-lc-48 .metadata {
+                font-size: 9px;
+            }
+
+            #doc-fo-lc-48 .section-header {
+                font-size: 12px;
+                padding: 5px 10px;
+                margin-top: 8px;
+                margin-bottom: 6px;
+            }
+
+            #doc-fo-lc-48 table {
+                margin-bottom: 6px;
+            }
+
+            #doc-fo-lc-48 table th {
+                font-size: 10px;
+                padding: 5px 3px;
+            }
+
+            #doc-fo-lc-48 table td {
+                font-size: 10.5px;
+                padding: 5px 3px;
+            }
+
+            #doc-fo-lc-48 .cedit {
+                font-size: 10.5px;
+                padding: 3px;
+            }
+
+            #doc-fo-lc-48 strong {
+                font-size: 11px;
+            }
+
+            #doc-fo-lc-48 .section {
+                margin-bottom: 8px;
+                padding: 8px;
+            }
+
+            #doc-fo-lc-48 .signature-area {
+                margin-top: 12px;
+                margin-bottom: 20px;
+            }
+
+            #doc-fo-lc-48 .signature-box p {
+                font-size: 9.5px;
+                margin: 3px 0;
+            }
+
+            #doc-fo-lc-48 .footer {
+                font-size: 7.5px;
+                margin-top: 10px;
+            }
+
+            #doc-fo-lc-48 .logo-container svg {
+                height: 50px;
+            }
+
+            #doc-fo-lc-48 p[style*="font-size:10px"] {
+                font-size: 8.5px !important;
+            }
+
+            #doc-fo-lc-48 p[style*="font-size:9px"] {
+                font-size: 8px !important;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body id="doc-fo-lc-48">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
+        <button class="btn btn-danger" onclick="clearForm()">Limpiar</button>
+    </div>
+
+    <div class="container">
+        <div class="header-top">
+            <div class="logo-container"><svg viewBox="0 0 320 80">
+                    <defs>
+                        <style>
+                            .t {
+                                font-family: 'Arial Black', sans-serif;
+                                font-weight: 900;
+                                fill: #1D1D1B
+                            }
+
+                            .s {
+                                font-family: 'Arial', sans-serif;
+                                font-weight: 700;
+                                fill: #1D1D1B;
+                                letter-spacing: 2px
+                            }
+
+                            .c {
+                                fill: #2E9D82
+                            }
+                        </style>
+                    </defs>
+                    <g transform="translate(0,-2) scale(0.85)">
+                        <circle class="c" cx="25" cy="25" r="13" />
+                        <circle class="c" cx="75" cy="75" r="13" />
+                        <path class="c"
+                            d="M15.8,65.8C28.5,53.1 33.7,59.2 46.5,46.5C59.2,33.7 53.1,28.5 65.8,15.8A13 13 0 1 1 84.2,34.2C71.5,46.9 66.3,40.8 53.5,53.5C40.8,66.3 46.9,71.5 34.2,84.2A13 13 0 1 1 15.8,65.8Z" />
+                    </g><text x="90" y="42" class="t" font-size="34">XELLE</text><text x="91" y="68" class="s"
+                        font-size="19">SCIENTIFIC</text><text x="215" y="35" font-family="Arial" font-size="10"
+                        fill="#1D1D1B">®</text>
+                </svg></div>
+            <div class="registry-container">
+                <label>Certificado/Dictamen</label>
+                <div class="registry-wrapper"><span class="registry-prefix">FO-LC-48-</span><input type="text"
+                        id="reg-48" class="registry-input generate-barcode" data-target="barcode-48"
+                        data-prefix="FO-LC-48-"></div>
+                <input type="text" class="registry-date">
+                <svg id="barcode-48" class="barcode-svg"></svg>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <h1>REGISTRO DE RESULTADOS ANALÍTICOS Y DICTAMEN DE LOTE</h1>
+            <div class="metadata">Código: FO-LC-48 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
+        </div>
+
+        <div class="section-header">1. TRAZABILIDAD DE LA MUESTRA</div>
+        <div class="section">
+            <table class="no-border-table">
+                <tr>
+                    <td style="padding:6px;"><strong>Producto / Insumo:</strong></td>
+                    <td style="padding:6px;"><input class="cedit" style="font-weight:bold;"></td>
+                    <td style="padding:6px;"><strong>Lote / Serie:</strong></td>
+                    <td style="padding:6px;"><input class="cedit" style="font-weight:bold;"></td>
+                </tr>
+            </table>
+            <table class="compact-table" style="margin-top:12px;">
+                <thead>
+                    <tr>
+                        <th style="padding:7px;">Referencia Documental Previa</th>
+                        <th style="padding:7px;">No. Folio</th>
+                        <th style="padding:7px;">Fecha Ejecución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:7px;">Registro de Muestreo (FO-LC-46)</td>
+                        <td style="padding:7px;"><input class="cedit"></td>
+                        <td style="padding:7px;"><input type="text" class="cedit"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:7px;">Revisión de Calidad Física (FO-LC-47)</td>
+                        <td style="padding:7px;"><input class="cedit"></td>
+                        <td style="padding:7px;"><input type="text" class="cedit"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header">2. RESULTADOS DE CONTROL MICROBIOLÓGICO</div>
+        <div class="section">
+            <p style="font-size:11px; color:#666; margin-bottom:6px;">Evidencias base en formato FO-LC-41</p>
+            <table class="compact-table">
+                <thead>
+                    <tr>
+                        <th width="30%" style="padding:7px;">Referencia (Folio FO-LC-41)</th>
+                        <th width="15%" style="padding:7px;">Ingreso</th>
+                        <th width="15%" style="padding:7px;">TGL</th>
+                        <th width="15%" style="padding:7px;">AST</th>
+                        <th width="15%" style="padding:7px;">ADS</th>
+                        <th width="10%" style="padding:7px;">Global</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:7px;"><input class="cedit"></td>
+                        <td style="padding:7px;"><input class="cedit" type="text"></td>
+                        <td style="padding:7px;"><input class="cedit" type="text"></td>
+                        <td style="padding:7px;"><input class="cedit" type="text"></td>
+                        <td style="padding:7px;"><input class="cedit" type="text"></td>
+                        <td style="padding:7px;"><input class="cedit" type="text" style="font-weight:bold;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header">3. DICTAMEN FINAL Y LIBERACIÓN</div>
+        <div class="section" style="border: 2px solid #1E3A5F; padding:18px; background:#f8fafc;">
+            <div style="display:flex; justify-content:space-between;">
+                <div style="width:60%;">
+                    <label style="font-size:13px;"><strong>Observaciones / Resultados Fuera de Especificación
+                            (OOS):</strong></label>
+                    <textarea class="cedit" rows="3" style="width:100%; font-size:12px;"></textarea>
+                </div>
+                <div style="width:35%; text-align:center;">
+                    <label style="font-weight:bold; display:block; font-size:13px;">ESTATUS ASIGNADO:</label>
+                    <input class="cedit" type="text"
+                        style="font-size:18px; font-weight:bold; padding:12px; width:100%; border:2px solid #ccc; margin-top:5px;">
+                </div>
+            </div>
+            <p style="font-size:10px; margin-top:8px; color:#555;">* Liberado: Cumple especificaciones. Uso en
+                producción
+                o almacén definitivo.<br>* Rechazado: Riesgo Crítico. Segregación física, etiqueta roja e iniciar
+                Reporte NC.</p>
+        </div>
+
+        <div class="signature-area">
+            <div class="signature-box">
+                <p style="font-size:12px; font-weight:bold; margin:8px 0 4px 0;">Analista de Laboratorio</p>
+                <input type="text" style="padding:6px;">
+                <p style="font-size:11px; margin-top:4px;">Ejecutor de Pruebas</p>
+            </div>
+            <div class="signature-box">
+                <p style="font-size:12px; font-weight:bold; margin:8px 0 4px 0;">Jefe de Calidad</p>
+                <input type="text" style="padding:6px;">
+                <p style="font-size:11px; margin-top:4px;">Revisión Resultados</p>
+            </div>
+            <div class="signature-box">
+                <p style="font-size:12px; font-weight:bold; margin:8px 0 4px 0;">Responsable Dirección</p>
+                <input type="text" style="padding:6px;">
+                <p style="font-size:11px; margin-top:4px;">Autorización Legal</p>
+            </div>
+        </div>
+        <div class="footer">FO-LC-48-O | RESULTADOS Y DICTAMEN DE LOTE | Versión: 1.0<br>El contenido de este documento
+            es propiedad de &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de
+            autor, por lo que está prohibida su reproducción total o parcial.</div>
+    </div>
+</body>
+
+</html>

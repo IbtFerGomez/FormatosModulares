@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FO-LC-24 Inventario</title>
+    <link rel="stylesheet" href="format-styles-OffLine.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="format-app-OffLine.js"></script>
+    <style>
+        .header-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .header-main {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header-main h1 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .header-main .metadata {
+            font-size: 10px;
+            margin: 0;
+        }
+
+        .barcode-svg {
+            margin-bottom: 0;
+        }
+
+        .registry-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .registry-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .registry-prefix {
+            padding: 4px 6px;
+            background-color: #f0f0f0;
+            border: 1px solid #999;
+            border-right: none;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .registry-input {
+            width: 100px;
+            padding: 4px;
+            border: 1px solid #999;
+            font-size: 11px;
+        }
+
+        .registry-date {
+            margin-top: 3px;
+            padding: 3px;
+            border: 1px solid #999;
+            font-size: 10px;
+        }
+
+        /* REGLAS DE IMPRESIÓN FORZADA */
+        @media print {
+            @page {
+                size: letter landscape;
+                margin: 0.5cm;
+            }
+
+            body,
+            .container {
+                margin: 0 !important;
+                padding: 10px !important;
+                background: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            input::placeholder {
+                color: transparent !important;
+            }
+
+            /* Hacer header horizontal en impresión */
+            .header-top {
+                display: flex !important;
+                align-items: flex-start !important;
+                justify-content: space-between !important;
+                margin-bottom: 5px !important;
+            }
+
+            .header-main {
+                text-align: center !important;
+                margin-bottom: 10px !important;
+            }
+
+            .header-main h1 {
+                font-size: 14px !important;
+                margin: 0 0 5px 0 !important;
+            }
+
+            .header-main .metadata {
+                font-size: 8px !important;
+                margin: 0 !important;
+            }
+
+            /* Reducir área de firmas */
+            .signature-area {
+                margin-top: 10px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .signature-box {
+                padding: 5px !important;
+            }
+
+            .signature-box p {
+                margin: 2px 0 !important;
+                font-size: 9px !important;
+            }
+
+            .signature-box input {
+                padding: 3px !important;
+                font-size: 9px !important;
+            }
+
+            /* Permitir que la tabla se rompa entre páginas */
+            .section {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            table,
+            .compact-table,
+            .inv-table {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tr,
+            tbody tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            /* Bordes Negros */
+            table,
+            th,
+            td {
+                border: 1px solid #000 !important;
+                border-collapse: collapse !important;
+            }
+
+            td {
+                height: 28px !important;
+            }
+
+            input.cedit {
+                border: none !important;
+            }
+
+            /* Resaltar columnas de cálculo */
+            .col-total {
+                background-color: #eee !important;
+                font-weight: bold;
+                border-left: 2px solid #000 !important;
+            }
+        }
+
+        /* Estilos Visuales */
+        .inv-table th {
+            background: #f0f0f0;
+            font-size: 9px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #999;
+            padding: 2px;
+        }
+
+        .inv-table td {
+            border: 1px solid #999;
+            padding: 0;
+        }
+
+        .inv-table input {
+            width: 98%;
+            text-align: center;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 10px;
+        }
+
+        .product-label {
+            text-align: left !important;
+            padding-left: 5px !important;
+            font-weight: bold;
+            font-size: 9px;
+        }
+
+        /* Columnas destacadas en pantalla */
+        .col-total {
+            background-color: #e8f8f5;
+            border-left: 2px solid #333;
+        }
+
+        .col-bio {
+            background-color: #fdf2e9;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body id="doc-fo-lc-24">
+    <div class="global-controls no-print">
+        <button class="btn btn-success" onclick="saveForm()">Guardar</button>
+        <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
+    </div>
+
+    <div class="container">
+        <div class="header-top">
+            <div class="logo-container">
+                <svg viewBox="0 0 320 80">
+                    <defs>
+                        <style>
+                            .svg-logo-titulo {
+                                font-family: 'Arial Black', sans-serif;
+                                font-weight: 900;
+                                fill: #1D1D1B
+                            }
+
+                            .svg-logo-subtitulo {
+                                font-family: 'Arial', sans-serif;
+                                font-weight: 700;
+                                fill: #1D1D1B;
+                                letter-spacing: 2px
+                            }
+
+                            .svg-logo-celula {
+                                fill: #2E9D82
+                            }
+                        </style>
+                    </defs>
+                    <g transform="translate(0, -2) scale(0.85)">
+                        <circle class="svg-logo-celula" cx="25" cy="25" r="13" />
+                        <circle class="svg-logo-celula" cx="75" cy="75" r="13" />
+                        <path class="svg-logo-celula"
+                            d="M15.81,65.81C28.54,53.08 33.74,59.19 46.46,46.46C59.19,33.74 53.08,28.54 65.81,15.81A13 13 0 1 1 84.19,34.19C71.46,46.92 66.26,40.81 53.54,53.54C40.81,66.26 46.92,71.46 34.19,84.19A13 13 0 1 1 15.81,65.81Z" />
+                    </g><text x="90" y="42" class="svg-logo-titulo" font-size="34">XELLE</text><text x="91" y="68"
+                        class="svg-logo-subtitulo" font-size="19">SCIENTIFIC</text><text x="215" y="35"
+                        font-family="Arial" font-size="10" fill="#1D1D1B">®</text>
+                </svg>
+            </div>
+            <div class="registry-container">
+                <label>Folio Inventario</label>
+                <div class="registry-wrapper">
+                    <span class="registry-prefix">FO-LC-24-</span>
+                    <input type="text" id="reg-24-off" class="registry-input generate-barcode"
+                        data-target="barcode-24-off" data-prefix="FO-LC-24-">
+                </div>
+                <input type="date" class="registry-date no-auto-date">
+                <svg id="barcode-24-off" class="barcode-svg"></svg>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <h1>CONTROL DIARIO DE INVENTARIO Y DOSIFICACIÓN</h1>
+            <div class="metadata">Código: FO-LC-24 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
+        </div>
+
+        <div class="section">
+            <table class="compact-table inv-table" id="tbl-inventario">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Producto / Presentación</th>
+                        <th style="width: 12%;">Lote(s)</th>
+                        <th style="width: 8%;">Stock</th>
+                        <th style="width: 8%;">Salidas</th>
+                        <th style="width: 8%;">Reproceso</th>
+                        <th style="width: 10%;" class="col-total">Total Salidas</th>
+                        <th style="width: 14%;" class="col-bio">Células Usadas (M)</th>
+                        <th style="width: 14%;" class="col-bio">Exos Usados (B)</th>
+                        <th class="no-print" style="width: 3%;">—</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-inventario">
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-mini no-print" onclick="addInventoryRow()">+ Agregar Fila</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Registro de Mermas y Ajustes</div>
+            <table class="compact-table" style="border: 1px solid #ccc;">
+                <tr>
+                    <td style="width: 15%; background:#f9f9f9;"><strong>Lote Afectado:</strong></td>
+                    <td style="width: 35%;"><input class="cedit"></td>
+                    <td style="width: 15%; background:#f9f9f9;"><strong>Causa:</strong></td>
+                    <td style="width: 35%;"><input class="cedit"></td>
+                </tr>
+                <tr>
+                    <td style="background:#f9f9f9;"><strong>Observaciones:</strong></td>
+                    <td colspan="3"><input class="cedit"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="signature-area">
+            <div class="signature-box">
+                <p>Elaboró:</p><input type="text">
+                <p>Firma</p>
+            </div>
+            <div class="signature-box">
+                <p>Revisó (Calidad):</p><input type="text">
+                <p>Firma</p>
+            </div>
+            <div class="signature-box">
+                <p>Autorizó (Responsable Dirección):</p><input type="text">
+                <p>Firma</p>
+            </div>
+        </div>
+
+        <div class="footer">FO-LC-24-O | INVENTARIO | Versión: 1.0<br>El contenido de este documento es propiedad
+            de &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que
+            está prohibida su reproducción total o parcial.</div>
+    </div>
+
+    <script>
+        function addInventoryRow() {
+            const tbody = document.getElementById('tbody-inventario');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td><input class="cedit" placeholder="Producto / Presentación..."></td>
+                <td><input class="cedit" placeholder="Lote(s)"></td>
+                <td><input class="cedit" placeholder="Stock"></td>
+                <td><input class="cedit" placeholder="Salidas"></td>
+                <td><input class="cedit" placeholder="Reproceso"></td>
+                <td class="col-total"><input class="cedit" placeholder="Total"></td>
+                <td class="col-bio"><input class="cedit" placeholder="Células (M)"></td>
+                <td class="col-bio"><input class="cedit" placeholder="Exos (B)"></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">×</button></td>
+            `;
+
+            tbody.appendChild(row);
+        }
+
+        // Inicializar con 5 filas vacías
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('tbody-inventario');
+            if (tbody.children.length === 0) {
+                for (let i = 0; i < 5; i++) {
+                    addInventoryRow();
+                }
+            }
+
+            // Inicializar generadores de código de barras
+            const barcodeInputs = document.querySelectorAll('.generate-barcode');
+            barcodeInputs.forEach(input => {
+                const targetId = input.getAttribute('data-target');
+                const prefix = input.getAttribute('data-prefix') || '';
+
+                input.addEventListener('input', function () {
+                    const value = this.value.trim();
+                    const fullCode = prefix + value;
+                    const svgElement = document.getElementById(targetId);
+
+                    if (value && svgElement) {
+                        try {
+                            JsBarcode(svgElement, fullCode, {
+                                format: "CODE128",
+                                width: 1.5,
+                                height: 35,
+                                displayValue: true,
+                                fontSize: 10,
+                                margin: 2
+                            });
+                        } catch (e) {
+                            console.error('Error generando código de barras:', e);
+                        }
+                    } else if (svgElement) {
+                        svgElement.innerHTML = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
