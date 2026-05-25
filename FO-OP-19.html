@@ -164,7 +164,7 @@
                             style="width:100%; border-bottom:1px solid #ccc; font-weight:bold;"
                             placeholder="Ej. Cuarto de Cultivo 1"></td>
                     <td width="15%"><strong>Mes / Año:</strong></td>
-                    <td width="30%"><input type="month" class="cedit" style="border-bottom:1px solid #ccc;"></td>
+                    <td width="30%"><input type="text" class="cedit" style="border-bottom:1px solid #ccc;"></td>
                 </tr>
             </table>
         </div>
@@ -177,16 +177,17 @@
                 <thead>
                     <tr>
                         <th rowspan="2" width="5%">DÍA</th>
-                        <th colspan="5" width="40%">SUPERFICIES (Marcar)</th>
+                        <th colspan="5" width="35%">SUPERFICIES (Marcar)</th>
+                        <th rowspan="2" width="10%">RETIRO DE BASURA</th>
                         <th rowspan="2" width="30%">SANITIZANTE / LOTE</th>
-                        <th rowspan="2" width="25%">REALIZÓ (Firma / Inic.)</th>
+                        <th rowspan="2" width="20%">REALIZÓ (Firma / Inic.)</th>
                     </tr>
                     <tr>
-                        <th width="8%">PISOS</th>
-                        <th width="8%">PAREDES</th>
-                        <th width="8%">TECHOS</th>
-                        <th width="8%">MESAS</th>
-                        <th width="8%">EQUIPOS</th>
+                        <th width="7%">PISOS</th>
+                        <th width="7%">PAREDES</th>
+                        <th width="7%">TECHOS</th>
+                        <th width="7%">MESAS</th>
+                        <th width="7%">EQUIPOS</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-limpieza">
@@ -202,14 +203,14 @@
                     <span style="font-size:8px;">(Revisión de Cumplimiento)</span>
                     <input class="cedit" placeholder="Nombre y Firma"
                         style="border-top:1px solid #ccc; border-radius:0; margin-top:25px;">
-                    <p>Fecha: <input type="date" class="cedit" style="width:120px;"></p>
+                    <p>Fecha: <input type="text" class="cedit" style="width:120px;"></p>
                 </div>
                 <div class="signature-box" style="flex:1; background-color:#f0fdf4;">
                     <p style="font-weight:bold; color:#14532d;">ASEGURAMIENTO DE CALIDAD</p>
                     <span style="font-size:8px;">(Cierre de Bitácora)</span>
                     <input class="cedit" placeholder="Nombre y Firma"
                         style="border-top:1px solid #166534; border-radius:0; margin-top:25px; background:transparent;">
-                    <p>Fecha: <input type="date" class="cedit" style="width:120px; background:transparent;"></p>
+                    <p>Fecha: <input type="text" class="cedit" style="width:120px; background:transparent;"></p>
                 </div>
             </div>
         </div>
@@ -227,9 +228,10 @@
         function generarTablaLimpieza() {
             const tbody = document.getElementById('tbody-limpieza');
             let rows = '';
-            for (let i = 1; i <= 50; i++) {
+            for (let i = 1; i <= 31; i++) {
                 rows += `<tr>
                     <td style="font-weight:bold; background-color:#f8fafc;">${i}</td>
+                    <td><input class="cedit"></td>
                     <td><input class="cedit"></td>
                     <td><input class="cedit"></td>
                     <td><input class="cedit"></td>
