@@ -72,8 +72,20 @@
             ::placeholder {
                 color: transparent !important;
             }
+
+            textarea.cedit {
+                border: 1px solid #ccc !important;
+            }
         }
-        .footer { text-align: center; font-size: 8px; color: #64748b; margin-top: 20px; padding-top: 10px; border-top: 1px solid #e2e8f0; }
+
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
     </style>
 </head>
 
@@ -179,9 +191,12 @@
             <div style="margin-top:10px;">
                 <strong>Condiciones de Entrega:</strong>
                 <div class="cbx-group">
-                    <label><input type="radio" name="cond_entrega" class="cedit" style="width: min-content;"> Ambiente</label>
-                    <label><input type="radio" name="cond_entrega" class="cedit" style="width: min-content;"> Refrigeración (2-8°C)</label>
-                    <label><input type="radio" name="cond_entrega" class="cedit" style="width: min-content;"> Congelación (&lt;-20°C)</label>
+                    <label><input type="radio" name="cond_entrega" class="cedit" style="width: min-content;">
+                        Ambiente</label>
+                    <label><input type="radio" name="cond_entrega" class="cedit" style="width: min-content;">
+                        Refrigeración (2-8°C)</label>
+                    <label><input type="radio" name="cond_entrega" class="cedit" style="width: min-content;">
+                        Congelación (&lt;-20°C)</label>
                 </div>
             </div>
             <div style="margin-top:10px;">
@@ -243,11 +258,14 @@
             <div style="border: 2px solid #1E3A5F; padding: 10px; background-color: #f8fafc; border-radius: 4px;">
                 <strong style="font-size:11px;">DICTAMEN:</strong>
                 <div class="cbx-group" style="flex-direction: column; gap: 8px; margin-top: 5px;">
-                    <label style="color:#166534; font-weight:bold;"><input type="radio" name="dictamen" class="cedit" style="width: min-content;">
+                    <label style="color:#166534; font-weight:bold;"><input type="radio" name="dictamen" class="cedit"
+                            style="width: min-content;">
                         APROBADO (LIBERADO PARA USO): Etiqueta VERDE (ET-AL-05).</label>
-                    <label style="color:#991b1b; font-weight:bold;"><input type="radio" name="dictamen" class="cedit" style="width: min-content;">
+                    <label style="color:#991b1b; font-weight:bold;"><input type="radio" name="dictamen" class="cedit"
+                            style="width: min-content;">
                         RECHAZADO (PNC): Etiqueta ROJA (ET-PNC-02) y segregar.</label>
-                    <label style="color:#b45309; font-weight:bold;"><input type="radio" name="dictamen" class="cedit" style="width: min-content;">
+                    <label style="color:#b45309; font-weight:bold;"><input type="radio" name="dictamen" class="cedit"
+                            style="width: min-content;">
                         EN CUARENTENA: Pendiente de análisis interno. Etiqueta AMARILLA (ET-LC-03).</label>
                 </div>
             </div>
@@ -268,7 +286,10 @@
                 <input type="text" placeholder="Nombre y Firma" class="cedit">
             </div>
         </div>
-        <div class="footer">FO-OP-41 | Versión: 1.0 | RECEPCIÓN Y APROBACIÓN DE MATERIAS PRIMAS E INSUMOS | Xelle Scientific | Página 1 de 1<br>El contenido de este documento es propiedad de &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que está prohibida su reproducción total o parcial.</div>
+        <div class="footer">FO-OP-41 | Versión: 1.0 | RECEPCIÓN Y APROBACIÓN DE MATERIAS PRIMAS E INSUMOS | Xelle
+            Scientific | Página 1 de 1<br>El contenido de este documento es propiedad de &quot;Xelle Scientific&quot;,
+            S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que está prohibida su reproducción
+            total o parcial.</div>
 
     </div>
 
@@ -363,6 +384,6 @@
             }
         }
     </script>
-    </body>
+</body>
 
 </html>
