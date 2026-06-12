@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>FO-OP-16 Surtido</title>
+    <title>FO-CP-01 Pedido Maestro</title>
     <link rel="stylesheet" id="op-styles" href="format-styles-operaciones.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -42,82 +42,76 @@
     </script>
     <style>
         /* Estilo para fijar el footer al final de la hoja en impresión */
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
         @media print {
             .footer {
-                position: static;
+                position: fixed;
+                bottom: 0;
+                left: 0;
                 width: 100%;
                 background-color: white;
                 text-align: center;
-                padding: 10px 0 0 0;
+                padding: 10px 0;
                 border-top: 1px solid #eee;
-                font-size: 9px !important;
-                color: #000 !important;
-                margin-top: 16px !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
+                font-size: 9px ;
+                color: #000 ;
             }
 
-            /* Espacio para evitar que el contenido se encime al footer */
             body {
-                padding-bottom: 0;
-                height: auto !important;
-                overflow: visible !important;
-            }
-
-            .container {
-                min-height: auto !important;
-                overflow: visible !important;
+                padding-bottom: 50px;
             }
 
             .no-print {
-                display: none !important;
+                display: none ;
             }
 
             /* Permitir que las tablas y secciones se partan entre páginas */
             .section {
-                page-break-inside: auto !important;
-                break-inside: auto !important;
+                page-break-inside: auto ;
+                break-inside: auto ;
             }
 
             table,
             .compact-table {
-                page-break-inside: auto !important;
-                break-inside: auto !important;
+                page-break-inside: auto ;
+                break-inside: auto ;
             }
 
             thead {
-                display: table-header-group !important;
+                display: table-header-group ;
             }
 
             tr,
             tbody tr {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
+                page-break-inside: avoid ;
+                break-inside: avoid ;
             }
 
             .section-title {
-                page-break-after: avoid !important;
-                break-after: avoid !important;
-                background-color: var(--secondary-color) !important;
-                color: #fff !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                page-break-after: avoid ;
+                break-after: avoid ;
             }
+        }
 
-            .signature-area {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            ::placeholder {
-                color: transparent !important;
-            }
-        
+        @media print {
 
+            input::placeholder,
+            textarea::placeholder {
+                color: transparent ;
+            }
         }
     </style>
 </head>
 
-<body id="doc-fo-op-16">
+<body id="doc-FO-CP-01">
     <div class="global-controls no-print">
         <button class="btn btn-success" onclick="saveForm()">Guardar</button>
         <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
@@ -159,164 +153,186 @@
                 </svg>
             </div>
             <div class="registry-container">
-                <label>Folio Surtido</label>
+                <label>No. Pedido (PV)</label>
                 <div class="registry-wrapper">
-                    <span class="registry-prefix">FO-OP-16-</span>
-                    <input type="text" id="reg-op-16" class="registry-input generate-barcode"
-                        data-target="barcode-op-16" data-prefix="FO-OP-16-" placeholder="001">
+                    <span class="registry-prefix">FO-CP-01-</span>
+                    <input type="text" id="reg-op-15" class="registry-input generate-barcode"
+                        data-target="barcode-op-15" data-prefix="FO-CP-01-" placeholder="001">
                 </div>
                 <input type="text" class="registry-date no-auto-date">
-                <svg id="barcode-op-16" class="barcode-svg"></svg>
+                <svg id="barcode-op-15" class="barcode-svg"></svg>
             </div>
         </div>
 
         <div class="header-main">
-            <h1>ORDEN DE SURTIDO Y EMPAQUE (OPERACIONES)</h1>
-            <div class="metadata">Código: FO-OP-16 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
+            <h1>REGISTRO MAESTRO DE PEDIDO (OPERACIONES)</h1>
+            <div class="metadata">Código: FO-CP-01 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
         </div>
 <div class="legend-box">
             <div><strong>Cruce Documental Obligatorio:</strong><br>FO-CP-01 (Orden compra) ➜ FO-OP-15 (Pedido) ➜
                 FO-OP-15-B (Fabricación) ➜ FO-OP-16 (Surtido) ➜ FO-OP-17 (Remision y entrega)</div>
         </div>
         <div class="section">
-            <div class="section-title">1. Enlace Administrativo</div>
+            <div class="section-title">1. Trazabilidad de Operaciones (Origen)</div>
             <table class="no-border-table">
                 <tr>
-                    <td><strong>Ref. Pedido (FO-OP-15):</strong> <input class="cedit" placeholder="PV-..."
-                            style="font-weight:bold;"></td>
-                    <td><strong>Cliente Destino:</strong> <input class="cedit"></td>
-                </tr>
-                <tr>
-                    <td><strong>Fecha Surtido:</strong> <input type="text" class="cedit"></td>
-                    <td><strong>Responsable Operaciones:</strong> <input class="cedit"></td>
+                    <td width="33%"><strong>Ref. Cotización:</strong> <input class="cedit" placeholder="COT-XXXX"></td>
+                    <td width="33%"><strong>Orden de Compra (Cliente):</strong> <input class="cedit"
+                            placeholder="OC-XXXX"></td>
+                    <td width="33%"><strong>Vendedor:</strong> <input class="cedit"></td>
                 </tr>
             </table>
         </div>
 
         <div class="section">
-            <div class="section-title">2. Picking List (Surtido)</div>
-            <table id="tbl-picking" class="compact-table">
+            <div class="section-title">2. Datos del Cliente</div>
+            <table class="no-border-table">
+                <tr>
+                    <td width="70%"><strong>Razón Social / Cliente:</strong> <input class="cedit"></td>
+                    <td width="30%"><strong>Fecha Solicitud:</strong> <input type="text" class="cedit"></td>
+                </tr>
+                <tr>
+                    <td><strong>Dirección Fiscal:</strong> <input class="cedit"></td>
+                    <td><strong>RFC:</strong> <input class="cedit"></td>
+                </tr>
+                <tr>
+                     <td colspan="2"><strong>Dirección de Entrega:</strong> <textarea name="direccion_entrega" id="direccion_entrega" rows="4"></textarea></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">3. Detalle del Pedido (Ruta Operativa)</div>
+            <table id="tbl-pedidos" class="compact-table">
                 <thead>
                     <tr>
+                        <th width="8%">Cant.</th>
                         <th width="25%">Producto</th>
                         <th width="20%">Presentación</th>
-                        <th width="15%">Ubicación </th>
-                        <th width="15%">Lote Seleccionado</th>
-                        <th width="10%">Cant. Req.</th>
-                        <th width="10%">Surtido</th>
-                        <th width="5%" class="no-print"></th>
+                        <th width="20%">Origen (Ruta)</th>
+                        <th width="20%">Fecha Req. Entrega</th>
+                        <th width="7%" class="no-print"></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
-            <div class="no-print" style="display: flex; gap: 10px; margin-top: 10px;">
-                <button class="btn btn-primary btn-mini" onclick="addPickingRow()">+ Agregar Línea</button>
-                <button class="btn btn-danger btn-mini" onclick="removeLastPickingRow()">- Quitar Última Línea</button>
-            </div>
+            <button class="btn btn-primary btn-mini no-print" onclick="addPedidoRowInputs()">+ Agregar Producto</button>
         </div>
 
         <div class="section">
-            <div class="section-title">3. Validación de Empaque (Cadena de Frío)</div>
-            <div style="display:flex; gap:20px;">
-                <div style="width: 50%;">
-                    <table class="compact-table">
-                        <tr>
-                            <td><strong>Tipo Hielera:</strong></td>
-                            <td><select class="cedit">
-                                    <option>Chica</option>
-                                    <option>Mediana</option>
-                                    <option>Grande</option>
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Geles Congelados:</strong></td>
-                            <td><input type="number" class="cedit"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Geles Refrigerados:</strong></td>
-                            <td><input type="number" class="cedit"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Datalogger ID:</strong></td>
-                            <td><input class="cedit"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div style="width: 50%;">
-                    <div style="border: 1px solid #ccc; padding: 10px; height: 100%;">
-                        <strong>Checklist Final:</strong><br>
-                        <label><input type="checkbox"> Producto verificado vs Pedido</label><br>
-                        <label><input type="checkbox"> Acondicionamiento Térmico OK</label><br>
-                        <label><input type="checkbox"> Etiqueta de Envío Colocada</label><br>
-                        <label><input type="checkbox"> Documentación Adjunta</label>
-                    </div>
-                </div>
-            </div>
+            <div class="section-title">4. Observaciones Ventas</div>
+            <textarea class="cedit" placeholder="Instrucciones especiales para producción o almacén..."></textarea>
         </div>
 
         <div class="signature-area">
             <div class="signature-box">
-                <p>Realizó Surtido:</p><input type="text">
+                <p>Ejecutó (Ejecutivo de Operaciones):</p><input type="text">
                 <p>Firma</p>
             </div>
             <div class="signature-box">
-                <p>Liberó Empaque:</p><input type="text">
+                <p>Revisó (Coordinación de Operaciones):</p><input type="text">
                 <p>Firma</p>
             </div>
+            <div class="signature-box">
+                <p>Autorizó (Gerencia de Operaciones):</p><input type="text">
+                <p>Firma</p>
+            </div>  
         </div>
 
-        <div class="footer">FO-OP-16 | SURTIDO | Versión: 1.0<br>El contenido de este documento es propiedad de
+        <div class="footer">FO-CP-01 | PEDIDO MAESTRO | Versión: 1.0<br>El contenido de este documento es propiedad de
             &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que
             está prohibida su reproducción total o parcial.</div>
     </div>
     <script>
         let isOfflineMode = false;
 
-        function initFoOp16Barcode() {
-            const barcodeInput = document.querySelector('.generate-barcode');
-            if (!barcodeInput) return;
-
-            const renderBarcode = function () {
-                const targetId = barcodeInput.dataset.target;
-                const prefix = barcodeInput.dataset.prefix || '';
-                const rawValue = String(barcodeInput.value || '').trim();
-                const normalizedValue = prefix && rawValue.startsWith(prefix)
-                    ? rawValue.slice(prefix.length)
-                    : rawValue;
-
-                if (normalizedValue !== rawValue) {
-                    barcodeInput.value = normalizedValue;
-                }
-
-                const targetEl = targetId ? document.getElementById(targetId) : null;
-                if (!targetEl) return;
-
-                if (!normalizedValue) {
-                    targetEl.innerHTML = '';
-                    return;
-                }
-
-                if (!window.JsBarcode) return;
-
-                try {
-                    JsBarcode(`#${targetId}`, prefix + normalizedValue, {
-                        format: 'CODE128',
-                        height: 30,
-                        displayValue: true,
-                        fontSize: 10,
-                        margin: 0
-                    });
-                } catch (error) {
-                    console.warn('No se pudo renderizar el código de barras en FO-OP-16', error);
-                }
-            };
-
-            barcodeInput.addEventListener('input', renderBarcode);
-            window.addEventListener('beforeprint', renderBarcode);
-            renderBarcode();
+        function convertTableSelectsToInputs(scope) {
+            const root = scope || document;
+            root.querySelectorAll('table tbody select').forEach(sel => {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = sel.className || 'cedit';
+                input.value = sel.options[sel.selectedIndex]?.text || '';
+                input.placeholder = sel.getAttribute('placeholder') || '';
+                if (sel.style.cssText) input.style.cssText = sel.style.cssText;
+                sel.parentNode.replaceChild(input, sel);
+            });
         }
 
-        document.addEventListener('DOMContentLoaded', initFoOp16Barcode);
+        function addPedidoRowInputs() {
+            const tbody = document.querySelector('#tbl-pedidos tbody');
+            if (!tbody) return;
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="number" class="cedit" min="0" step="1" placeholder="0"></td>
+                <td><input type="text" class="cedit" placeholder="Producto"></td>
+                <td><input type="text" class="cedit" placeholder="Presentacion"></td>
+                <td><input type="text" class="cedit" placeholder="Origen o ruta"></td>
+                <td><input type="text" class="cedit" placeholder="DD/MM/AAAA"></td>
+                <td class="no-print"><button type="button" class="btn btn-mini" onclick="removePedidoRow(this)">Eliminar</button></td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        function removePedidoRow(button) {
+            const row = button.closest('tr');
+            if (row) row.remove();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            convertTableSelectsToInputs(document);
+
+            const barcodeInput = document.querySelector('.generate-barcode');
+            if (barcodeInput) {
+                const renderBarcode = function () {
+                    const targetId = barcodeInput.dataset.target;
+                    const prefix = barcodeInput.dataset.prefix || '';
+                    const value = String(barcodeInput.value || '').trim();
+                    const normalizedValue = prefix && value.startsWith(prefix)
+                        ? value.slice(prefix.length)
+                        : value;
+                    if (!targetId || !window.JsBarcode) return;
+
+                    if (normalizedValue !== value) {
+                        barcodeInput.value = normalizedValue;
+                    }
+
+                    if (!normalizedValue) {
+                        const targetEl = document.getElementById(targetId);
+                        if (targetEl) targetEl.innerHTML = '';
+                        return;
+                    }
+
+                    try {
+                        JsBarcode(`#${targetId}`, prefix + normalizedValue, {
+                            format: 'CODE128',
+                            height: 30,
+                            displayValue: true,
+                            fontSize: 10,
+                            margin: 0
+                        });
+                    } catch (e) {
+                        console.warn('No se pudo renderizar el código de barras en FO-CP-01', e);
+                    }
+                };
+
+                barcodeInput.addEventListener('input', renderBarcode);
+                renderBarcode();
+            }
+
+            const tbody = document.querySelector('#tbl-pedidos tbody');
+            if (tbody && tbody.children.length === 0) {
+                addPedidoRowInputs();
+            }
+
+            if (tbody) {
+                const observer = new MutationObserver(function () {
+                    convertTableSelectsToInputs(tbody);
+                });
+                observer.observe(tbody, { childList: true, subtree: true });
+            }
+        });
 
         function toggleOfflineMode() {
             isOfflineMode = !isOfflineMode;
@@ -391,16 +407,16 @@
                     inp.removeAttribute('data-original-type');
                 });
 
-                // Restaurar <input type="text">
-                document.querySelectorAll('input[data-original-type="text"]').forEach(inp => {
-                    inp.type = 'text';
+                // Restaurar <input type="time">
+                document.querySelectorAll('input[data-original-type="time"]').forEach(inp => {
+                    inp.type = 'time';
                     inp.placeholder = '';
                     inp.removeAttribute('data-original-type');
                 });
 
-                // Restaurar <input type="text">
-                document.querySelectorAll('input[data-original-type="text"]').forEach(inp => {
-                    inp.type = 'text';
+                // Restaurar <input type="number">
+                document.querySelectorAll('input[data-original-type="number"]').forEach(inp => {
+                    inp.type = 'number';
                     inp.removeAttribute('data-original-type');
                 });
             }

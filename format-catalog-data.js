@@ -563,7 +563,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-LC-32-B",
     "file": "FO-LC-32-B.html",
     "type": "Formato",
-    "name": "FO-LC-32 Salida y Disposición de Muestras",
+    "name": "Salida y Disposición de Muestras",
     "area": "Laboratorio y Calidad",
     "version": "1.0",
     "vigencia": "Mar 2026",
@@ -826,10 +826,24 @@ window.FORMAT_CATALOG = [
     "motivoCambio": "Actualización de inventario documental"
   },
   {
+    "code": "FO-LC-52",
+    "file": "FO-LC-52.html",
+    "type": "Formato",
+    "name": "Bitácora de Revisión Diaria de CO2",
+    "area": "Laboratorio y Calidad",
+    "version": "1.0",
+    "vigencia": "May 2026",
+    "estado": "Vigente",
+    "proximaRevision": "N/A",
+    "ubicacionMaestro": "src/frontend/formats/FO-LC-52.html",
+    "sustituyeA": "N/A",
+    "motivoCambio": "Actualización de inventario documental"
+  },
+  {
     "code": "FO-LG-01-B",
     "file": "FO-LG-01-B.html",
     "type": "Formato",
-    "name": "FO-LG-01 Bitácora de Control de Flotilla y Transporte",
+    "name": "Bitácora de Control de Flotilla y Transporte",
     "area": "Logística",
     "version": "2.0",
     "vigencia": "May 2026",
@@ -857,7 +871,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-OP-01-B",
     "file": "FO-OP-01-B.html",
     "type": "Formato",
-    "name": "FO-OP-01 Programa Anual de Mantenimiento",
+    "name": "Programa Anual de Mantenimiento",
     "area": "Operaciones",
     "version": "1.0",
     "vigencia": "Mar 2026",
@@ -1036,6 +1050,20 @@ window.FORMAT_CATALOG = [
     "motivoCambio": "Actualización de inventario documental"
   },
   {
+    "code": "FO-OP-13-B",
+    "file": "FO-OP-13-B.html",
+    "type": "Formato",
+    "name": "Ficha Clínica de Recolección de Tejido Placentario",
+    "area": "Operaciones",
+    "version": "1.0",
+    "vigencia": "Mar 2026",
+    "estado": "Vigente",
+    "proximaRevision": "N/A",
+    "ubicacionMaestro": "src/frontend/formats/FO-OP-13-B.html",
+    "sustituyeA": "N/A",
+    "motivoCambio": "Actualización de inventario documental"
+  },
+  {
     "code": "FO-OP-14",
     "file": "FO-OP-14.html",
     "type": "Formato",
@@ -1207,7 +1235,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-OP-43",
     "file": "FO-OP-43.html",
     "type": "Formato",
-    "name": "FO-LC-43 Kárdex de Control de Inventarios",
+    "name": "Kárdex de Control de Inventarios",
     "area": "Operaciones",
     "version": "1.0",
     "vigencia": "ENE 2026",
@@ -1235,7 +1263,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-OP-49",
     "file": "FO-OP-49.html",
     "type": "Formato",
-    "name": "FO-LC-49 Bitácora de Almacenamiento Temporal de RPBI",
+    "name": "Bitácora de Almacenamiento Temporal de RPBI",
     "area": "Operaciones",
     "version": "1.0",
     "vigencia": "Mar 2026",
@@ -1249,7 +1277,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-OP-50",
     "file": "FO-OP-50.html",
     "type": "Formato",
-    "name": "FO-LC-50 FORMATO MANIFIESTO DE ENTREGA, TRANSPORTE Y RECEPCIÓN DE RESIDUOS PELIGROSOS (GENERADOR)",
+    "name": "FORMATO MANIFIESTO DE ENTREGA, TRANSPORTE Y RECEPCIÓN DE RESIDUOS PELIGROSOS (GENERADOR)",
     "area": "Operaciones",
     "version": "1.0",
     "vigencia": "ENE 2026",
@@ -1431,7 +1459,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-QA-02-A",
     "file": "FO-QA-02-A.html",
     "type": "Formato",
-    "name": "Lista de Verificación de Auditoría+",
+    "name": "- Lista de Verificación de Auditoría+",
     "area": "Aseguramiento de Calidad",
     "version": "1.0",
     "vigencia": "May 2026",
@@ -1753,7 +1781,7 @@ window.FORMAT_CATALOG = [
     "code": "FO-QA-17-B",
     "file": "FO-QA-17-B.html",
     "type": "Formato",
-    "name": "FO-QA-17 Evaluación del Curso Impartido",
+    "name": "Evaluación del Curso Impartido",
     "area": "Aseguramiento de Calidad",
     "version": "1.0",
     "vigencia": "Mar 2026",
@@ -1946,4 +1974,5 @@ window.FORMAT_CATALOG = [
     "motivoCambio": "Actualización de inventario documental"
   }
 ];
+
 
