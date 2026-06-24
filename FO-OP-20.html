@@ -9,6 +9,19 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="format-app.js"></script>
     <style>
+        .section-header, .section-title  {
+                background-color: #1E3A5F;
+                color: white;
+                padding: 6px 10px;
+                font-weight: bold;
+                font-size: 11px;
+                margin-top: 15px;
+                border-radius: 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-left: 4px solid #2E9D82;
+            }
+            
         /* Estilo para fijar el footer al final de la hoja en impresión */
         @media print {
             .footer {
@@ -54,9 +67,17 @@
                 break-inside: avoid !important;
             }
 
-            .section-title {
-                page-break-after: avoid !important;
-                break-after: avoid !important;
+           .section-header, .section-title  {
+                background-color: #1E3A5F;
+                color: white;
+                padding: 6px 10px;
+                font-weight: bold;
+                font-size: 11px;
+                margin-top: 15px;
+                border-radius: 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-left: 4px solid #2E9D82;
             }
         }
     </style>
@@ -121,7 +142,7 @@
         </div>
 
         <div class="section">
-            <div class="section-title">1. ALMACENAMIENTO</div>
+            <div class="section-title ">1. ALMACENAMIENTO</div>
 
             <div style="margin-bottom: 15px;">
                 <label style="display:block; font-weight:bold; margin-bottom:5px;">Ubicación de Almacenamiento del Lote

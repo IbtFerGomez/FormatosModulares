@@ -3,44 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>FO-OP-17 Remisión</title>
-    <link rel="stylesheet" id="op-styles" href="format-styles-operaciones.css">
+    <title>FO-OP-20-B Liberación Alm</title>
+    <link rel="stylesheet" href="format-styles.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        (function () {
-            const styleEl = document.getElementById('op-styles');
-            const styleCandidates = [
-                'format-styles-operaciones.css',
-                '/formats/format-styles-operaciones.css'
-            ];
-            let styleIndex = 0;
-
-            styleEl.addEventListener('error', function () {
-                styleIndex += 1;
-                if (styleIndex < styleCandidates.length) {
-                    styleEl.href = styleCandidates[styleIndex];
-                }
-            });
-
-            const scriptCandidates = [
-                'format-app-operaciones.js',
-                '/formats/format-app-operaciones.js'
-            ];
-            let scriptIndex = 0;
-
-            const loadScript = function () {
-                if (scriptIndex >= scriptCandidates.length) return;
-                const script = document.createElement('script');
-                script.src = scriptCandidates[scriptIndex++];
-                script.onerror = loadScript;
-                document.head.appendChild(script);
-            };
-
-            loadScript();
-        })();
-    </script>
+    <script src="format-app.js"></script>
     <style>
+        .section-header {
+                background-color: #1E3A5F;
+                color: white;
+                padding: 6px 10px;
+                font-weight: bold;
+                font-size: 11px;
+                margin-top: 15px;
+                border-radius: 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-left: 4px solid #2E9D82;
+            }
+            
         /* Estilo para fijar el footer al final de la hoja en impresión */
         @media print {
             .footer {
@@ -63,6 +44,8 @@
             .no-print {
                 display: none !important;
             }
+
+            
 
             /* Permitir que las tablas y secciones se partan entre páginas */
             .section {
@@ -90,45 +73,11 @@
                 page-break-after: avoid !important;
                 break-after: avoid !important;
             }
-
-            input::placeholder,
-            textarea::placeholder {
-                color: transparent !important;
-            }
-
-            input::-webkit-input-placeholder,
-            textarea::-webkit-input-placeholder {
-                color: transparent !important;
-            }
-
-            input::-moz-placeholder,
-            textarea::-moz-placeholder {
-                color: transparent !important;
-                opacity: 0 !important;
-            }
-
-            input:-ms-input-placeholder,
-            textarea:-ms-input-placeholder,
-            input::-ms-input-placeholder,
-            textarea::-ms-input-placeholder {
-                color: transparent !important;
-            }
-
-            select {
-                -webkit-appearance: none !important;
-                -moz-appearance: none !important;
-                appearance: none !important;
-                background-image: none !important;
-            }
-
-            select::-ms-expand {
-                display: none !important;
-            }
         }
     </style>
 </head>
 
-<body id="doc-fo-op-17">
+<body id="doc-fo-op-20-b">
     <div class="global-controls no-print">
         <button class="btn btn-success" onclick="saveForm()">Guardar</button>
         <button class="btn btn-primary" onclick="printForm()">Imprimir</button>
@@ -169,152 +118,133 @@
                         font-family="Arial" font-size="10" fill="#1D1D1B">®</text>
                 </svg>
             </div>
-
             <div class="registry-container">
-                <label>Folio Remisión</label>
+                <label>No. Liberación</label>
                 <div class="registry-wrapper">
-                    <span class="registry-prefix">FO-OP-17-</span>
-                    <input type="text" id="reg-op-17" class="registry-input generate-barcode"
-                        data-target="barcode-op-17" data-prefix="FO-OP-17-" name="folio_remision" placeholder="001">
+                    <span class="registry-prefix">FO-OP-20-B-</span>
+                    <input type="text" id="reg-20" class="registry-input generate-barcode" data-target="barcode-20"
+                        data-prefix="FO-OP-20-B-" placeholder="001">
                 </div>
                 <input type="text" class="registry-date no-auto-date">
-                <svg id="barcode-op-17" class="barcode-svg"></svg>
+                <svg id="barcode-20" class="barcode-svg"></svg>
             </div>
         </div>
 
         <div class="header-main">
-            <h1>NOTA DE REMISIÓN Y ENTREGA</h1>
-            <div class="metadata">Código: FO-OP-17 | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
-        </div>
-        <div class="legend-box">
-            <div><strong>Cruce Documental Obligatorio:</strong><br>FO-CP-01 (Orden compra) ➜ FO-OP-15 (Pedido) ➜
-                FO-OP-15-B (Fabricación) ➜ FO-OP-16 (Surtido) ➜ FO-OP-17 (Remision y entrega)</div>
-        </div>
-        <div class="section">
-            <div class="section-title">1. Datos del Cliente y Referencias</div>
-            <table class="no-border-table">
-                <tr>
-                    <td><strong>Cliente:</strong> <input class="cedit" name="cliente"></td>
-                    <td><strong>Fecha Envío:</strong> <input type="text" class="cedit" name="fecha_envio"></td>
-                </tr>
-                <tr>
-                    <td><strong>Dirección Entrega:</strong> <input class="cedit" name="direccion_entrega"></td>
-                    <td><strong>Ref. Pedido (PV):</strong> <input class="cedit" name="ref_pedido_pv"></td>
-                </tr>
-                <tr>
-                    <td><strong>Atención a:</strong> <input class="cedit" name="atencion_a"></td>
-                    <td><strong>Ref. Orden Compra (OC):</strong> <input class="cedit" name="ref_orden_compra_oc"></td>
-                </tr>
-            </table>
+            <h1>LIBERACIÓN LOTE PARA ALMACÉN COSMÉTICOS</h1>
+            <div class="metadata">Código: FO-OP-20-B | Versión: 1.0 | Vigencia: ENE 2026 | Página: 1 de 1</div>
         </div>
 
         <div class="section">
-            <div class="section-title">2. Productos Entregados</div>
-            <table id="tbl-remision" class="compact-table">
+            <div class="section-title section-header">1. ALMACENAMIENTO</div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:bold; margin-bottom:5px;">Ubicación de Almacenamiento del Lote
+                    Terminado:</label>
+                <input class="cedit" style="width:100%;" placeholder="ej: Almacén de Producto Terminado, Estante #B4">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display:block; font-weight:bold; margin-bottom:5px;">Condiciones de
+                    Almacenamiento:</label>
+                <input class="cedit" style="width:100%;" placeholder="ej: Ambiente Controlado, 2-8°C">
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title section-header">2. ESPECIFICACIÓN DE ENTREGA</div>
+            <table id="tbl-entrega" class="compact-table">
                 <thead>
                     <tr>
-                        <th width="10%">Cantidad</th>
-                        <th width="30%">Producto</th>
-                        <th width="25%">Presentación</th>
-                        <th width="20%">Lote</th>
+                        <th width="20%">Producto</th>
+                        <th width="15%">Lote</th>
                         <th width="15%">Caducidad</th>
+                        <th width="10%">Cantidad</th>
                         <th width="5%" class="no-print"></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
-            <button class="btn btn-primary btn-mini no-print" onclick="addRemisionRow()">+ Agregar Fila</button>
+            <button class="btn btn-primary btn-mini no-print" onclick="addDeliveryRow()">+ Agregar Fila</button>
         </div>
 
-        <div class="section">
-            <div class="section-title">3. Acuse de Recibo</div>
-            <div style="border: 1px solid #ddd; padding: 15px; background-color: #fcfcfc;">
-                <p style="font-size:10px; text-align:justify; margin-bottom:15px;">
-                    Por medio de la presente, acuso recibo de los productos descritos anteriormente, validando que el
-                    empaque se encuentra íntegro, sellado y manteniendo las condiciones de temperatura requeridas para
-                    su conservación.
-                </p>
-                <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                    <div style="width:30%">
-                        <strong>Fecha Recepción:</strong> <input type="text" class="cedit" name="fecha_recepcion">
+        <div class="section ">
+            <div style="margin-top: 30px; border-top: 2px solid #333; padding-top: 10px;">
+                <p><strong>Responsable de Almacén:</strong></p>
+                <div style="display:flex; gap:15px; align-items:flex-end;">
+                    <div style="flex:2">
+                        <label style="font-size:10px;">Nombre:</label>
+                        <input class="cedit" style="width:100%">
                     </div>
-                    <div style="width:30%">
-                        <strong>Hora:</strong> <input type="text" class="cedit" name="hora_recepcion">
+                    <div style="flex:1">
+                        <label style="font-size:10px;">Firma:</label>
+                        <input class="cedit" style="width:100%">
                     </div>
-                    <!-- <div style="width:30%">
-                        <strong>Temp. Recepción:</strong> <input class="cedit" name="temperatura_recepcion"
-                            style="width:60px; text-align:center;">
-                        °C
-                    </div> -->
+                    <div style="flex:1">
+                        <label style="font-size:10px;">Fecha:</label>
+                        <input type="text" class="cedit" style="width:100%">
+                    </div>
                 </div>
-                <div
-                    style="margin-top:40px; border-top:1px solid #333; width:60%; margin-left:auto; margin-right:auto; text-align:center; padding-top:5px;">
-                    Nombre y Firma de Conformidad
+                <p style="margin-top:20px;"><strong>Verificó (Control de Calidad):</strong></p>
+                <div style="display:flex; gap:15px; align-items:flex-end;">
+                    <div style="flex:2">
+                        <label style="font-size:10px;">Nombre:</label>
+                        <input class="cedit" style="width:100%">
+                    </div>
+                    <div style="flex:1">
+                        <label style="font-size:10px;">Firma:</label>
+                        <input class="cedit" style="width:100%">
+                    </div>
+                    <div style="flex:1">
+                        <label style="font-size:10px;">Fecha:</label>
+                        <input type="text" class="cedit" style="width:100%">
+                    </div>
+                </div>
+                <p style="margin-top:20px;"><strong>Autorizó (Responsable Dirección):</strong></p>
+                <div style="display:flex; gap:15px; align-items:flex-end;">
+                    <div style="flex:2">
+                        <label style="font-size:10px;">Nombre:</label>
+                        <input class="cedit" style="width:100%">
+                    </div>
+                    <div style="flex:1">
+                        <label style="font-size:10px;">Firma:</label>
+                        <input class="cedit" style="width:100%">
+                    </div>
+                    <div style="flex:1">
+                        <label style="font-size:10px;">Fecha:</label>
+                        <input type="text" class="cedit" style="width:100%">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="signature-area" style="margin-top: 30px;">
-            <div class="signature-box">
-                <p>Elaboró (Almacén / Logística):</p><input type="text">
-                <p>Firma</p>
-            </div>
-            <div class="signature-box">
-                <p>Revisó (Coordinación de Embarques):</p><input type="text">
-                <p>Firma</p>
-            </div>
-            <div class="signature-box">
-                <p>Autorizó (Gerencia de Operaciones):</p><input type="text">
-                <p>Firma</p>
-            </div>
-        </div>
-
-        <div class="footer">FO-OP-17 | REMISIÓN | Versión: 1.0<br>El contenido de este documento es propiedad de
+        <div class="footer">FO-OP-20-B | LIBERACIÓN ALM | Versión: 1.0<br>El contenido de este documento es propiedad de
             &quot;Xelle Scientific&quot;, S.A.P.I., de C. V., y está protegido por los derechos de autor, por lo que
             está prohibida su reproducción total o parcial.</div>
     </div>
+
     <script>
-        let isOfflineMode = false;
+        function addDeliveryRow() {
+            const tbody = document.getElementById('tbl-entrega').querySelector('tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input class="cedit" placeholder="Producto..."></td>
+                <td><input class="cedit" placeholder="Lote..."></td>
+                <td><input class="cedit" placeholder="Caducidad..."></td>
+                <td><input class="cedit" placeholder="Cant..."></td>
+                <td class="no-print"><button class="btn btn-danger btn-mini" onclick="this.closest('tr').remove()">x</button></td>
+            `;
+            tbody.appendChild(row);
+        }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const barcodeInput = document.querySelector('.generate-barcode');
-            if (barcodeInput) {
-                const renderBarcode = function () {
-                    const targetId = barcodeInput.dataset.target;
-                    const prefix = barcodeInput.dataset.prefix || '';
-                    const value = String(barcodeInput.value || '').trim();
-                    const normalizedValue = prefix && value.startsWith(prefix)
-                        ? value.slice(prefix.length)
-                        : value;
-                    if (!targetId || !window.JsBarcode) return;
-
-                    if (normalizedValue !== value) {
-                        barcodeInput.value = normalizedValue;
-                    }
-
-                    if (!normalizedValue) {
-                        const targetEl = document.getElementById(targetId);
-                        if (targetEl) targetEl.innerHTML = '';
-                        return;
-                    }
-
-                    try {
-                        JsBarcode(`#${targetId}`, prefix + normalizedValue, {
-                            format: 'CODE128',
-                            height: 30,
-                            displayValue: true,
-                            fontSize: 10,
-                            margin: 0
-                        });
-                    } catch (e) {
-                        console.warn('No se pudo renderizar el código de barras en FO-OP-17', e);
-                    }
-                };
-
-                barcodeInput.addEventListener('input', renderBarcode);
-                renderBarcode();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('#tbl-entrega tbody').children.length === 0) {
+                addDeliveryRow();
             }
         });
+    </script>
+    <script>
+        let isOfflineMode = false;
 
         function toggleOfflineMode() {
             isOfflineMode = !isOfflineMode;
